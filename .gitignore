@@ -71,3 +71,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 .idea
+/Assets/StreamingAssets/build_info.meta
+/Assets/StreamingAssets/build_info
+/Assets/StreamingAssets.meta

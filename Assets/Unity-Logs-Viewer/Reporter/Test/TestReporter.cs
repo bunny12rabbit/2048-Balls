@@ -20,6 +20,7 @@ using System.Collections;
 using System.Threading;
 #if UNITY_CHANGE3
 using UnityEngine.SceneManagement;
+
 #endif
 #if UNITY_CHANGE4
 using UnityEngine.Networking;
@@ -31,127 +32,141 @@ using UnityEngine.Networking;
 //just drop this scrip to any empty game object on first scene your game start at
 public class TestReporter : MonoBehaviour
 {
-	public int logTestCount = 100;
-	public int threadLogTestCount = 100;
-	public bool logEverySecond = true;
-	int currentLogTestCount;
-	Reporter reporter;
-	GUIStyle style;
-	Rect rect1;
-	Rect rect2;
-	Rect rect3;
-	Rect rect4;
-	Rect rect5;
-	Rect rect6;
+    public int logTestCount = 100;
+    public int threadLogTestCount = 100;
+    public bool logEverySecond = true;
+    
+    private int _currentLogTestCount;
+    private Reporter _reporter;
+    private GUIStyle _style;
+    private Rect _rect1;
+    private Rect _rect2;
+    private Rect _rect3;
+    private Rect _rect4;
+    private Rect _rect5;
+    private Rect _rect6;
 
-	Thread thread;
+    private Thread _thread;
 
-	void Start()
-	{
-		Application.runInBackground = true;
+    private void Start()
+    {
+        Application.runInBackground = true;
 
-		reporter = FindObjectOfType(typeof(Reporter)) as Reporter;
-		Debug.Log("test long text sdf asdfg asdfg sdfgsdfg sdfg sfg" +
-				  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg " +
-				  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg " +
-				  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg " +
-				  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg " +
-				  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg ssssssssssssssssssssss" +
-				  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf" +
-				  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf" +
-				  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf" +
-				  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf" +
-				  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf");
+        _reporter = FindObjectOfType(typeof(Reporter)) as Reporter;
+        Debug.Log("test long text sdf asdfg asdfg sdfgsdfg sdfg sfg" +
+                  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg " +
+                  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg " +
+                  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg " +
+                  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg " +
+                  "sdfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdfg ssssssssssssssssssssss" +
+                  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf" +
+                  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf" +
+                  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf" +
+                  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf" +
+                  "asdf asdf asdf asdf adsf \n dfgsdfg sdfg sdf gsdfg sfdg sf gsdfg sdfg asdf");
 
-		style = new GUIStyle();
-		style.alignment = TextAnchor.MiddleCenter;
-		style.normal.textColor = Color.white;
-		style.wordWrap = true;
+        _style = new GUIStyle();
+        _style.alignment = TextAnchor.MiddleCenter;
+        _style.normal.textColor = Color.white;
+        _style.wordWrap = true;
 
-		for (int i = 0; i < 10; i++) {
-			Debug.Log("Test Collapsed log");
-			Debug.LogWarning("Test Collapsed Warning");
-			Debug.LogError("Test Collapsed Error");
-		}
+        for (int i = 0; i < 10; i++)
+        {
+            Debug.Log("Test Collapsed log");
+            Debug.LogWarning("Test Collapsed Warning");
+            Debug.LogError("Test Collapsed Error");
+        }
 
-		for (int i = 0; i < 10; i++) {
-			Debug.Log("Test Collapsed log");
-			Debug.LogWarning("Test Collapsed Warning");
-			Debug.LogError("Test Collapsed Error");
-		}
+        for (int i = 0; i < 10; i++)
+        {
+            Debug.Log("Test Collapsed log");
+            Debug.LogWarning("Test Collapsed Warning");
+            Debug.LogError("Test Collapsed Error");
+        }
 
-		rect1 = new Rect(Screen.width / 2 - 120, Screen.height / 2 - 225, 240, 50);
-		rect2 = new Rect(Screen.width / 2 - 120, Screen.height / 2 - 175, 240, 100);
-		rect3 = new Rect(Screen.width / 2 - 120, Screen.height / 2 - 50, 240, 50);
-		rect4 = new Rect(Screen.width / 2 - 120, Screen.height / 2, 240, 50);
-		rect5 = new Rect(Screen.width / 2 - 120, Screen.height / 2 + 50, 240, 50);
-		rect6 = new Rect(Screen.width / 2 - 120, Screen.height / 2 + 100, 240, 50);
+        _rect1 = new Rect(Screen.width / 2 - 120, Screen.height / 2 - 225, 240, 50);
+        _rect2 = new Rect(Screen.width / 2 - 120, Screen.height / 2 - 175, 240, 100);
+        _rect3 = new Rect(Screen.width / 2 - 120, Screen.height / 2 - 50, 240, 50);
+        _rect4 = new Rect(Screen.width / 2 - 120, Screen.height / 2, 240, 50);
+        _rect5 = new Rect(Screen.width / 2 - 120, Screen.height / 2 + 50, 240, 50);
+        _rect6 = new Rect(Screen.width / 2 - 120, Screen.height / 2 + 100, 240, 50);
 
-		thread = new Thread(new ThreadStart(threadLogTest));
-		thread.Start();
-	}
+        _thread = new Thread(new ThreadStart(ThreadLogTest));
+        _thread.Start();
+    }
 
-	void OnDestroy()
-	{
-		thread.Abort();
-	}
+    private void OnDestroy()
+    {
+        _thread.Abort();
+    }
 
-	void threadLogTest()
-	{
-		for (int i = 0; i < threadLogTestCount; i++) {
-			Debug.Log("Test Log from Thread");
-			Debug.LogWarning("Test Warning from Thread");
-			Debug.LogError("Test Error from Thread");
-		}
-	}
+    private void ThreadLogTest()
+    {
+        for (int i = 0; i < threadLogTestCount; i++)
+        {
+            Debug.Log("Test Log from Thread");
+            Debug.LogWarning("Test Warning from Thread");
+            Debug.LogError("Test Error from Thread");
+        }
+    }
 
-	float elapsed;
-	void Update()
-	{
-		int drawn = 0;
-		while (currentLogTestCount < logTestCount && drawn < 10) {
-			Debug.Log("Test Log " + currentLogTestCount);
-			Debug.LogError("Test LogError " + currentLogTestCount);
-			Debug.LogWarning("Test LogWarning " + currentLogTestCount);
-			drawn++;
-			currentLogTestCount++;
-		}
+    private float _elapsed;
 
-		elapsed += Time.deltaTime;
-		if (elapsed >= 1) {
-			elapsed = 0;
-			Debug.Log("One Second Passed");
-		}
-	}
+    private void Update()
+    {
+        int drawn = 0;
+        while (_currentLogTestCount < logTestCount && drawn < 10)
+        {
+            Debug.Log("Test Log " + _currentLogTestCount);
+            Debug.LogError("Test LogError " + _currentLogTestCount);
+            Debug.LogWarning("Test LogWarning " + _currentLogTestCount);
+            drawn++;
+            _currentLogTestCount++;
+        }
 
-	void OnGUI()
-	{
-		if (reporter && !reporter.show) {
-			GUI.Label(rect1, "Draw circle on screen to show logs", style);
-			GUI.Label(rect2, "To use Reporter just create reporter from reporter menu at first scene your game start", style);
-			if (GUI.Button(rect3, "Load ReporterScene")) {
+        _elapsed += Time.deltaTime;
+        if (_elapsed >= 1)
+        {
+            _elapsed = 0;
+            Debug.Log("One Second Passed");
+        }
+    }
+
+    private void OnGUI()
+    {
+        if (_reporter && !_reporter.show)
+        {
+            GUI.Label(_rect1, "Draw circle on screen to show logs", _style);
+            GUI.Label(_rect2, "To use Reporter just create reporter from reporter menu at first scene your game start",
+                _style);
+            if (GUI.Button(_rect3, "Load ReporterScene"))
+            {
 #if UNITY_CHANGE3
-				SceneManager.LoadScene("ReporterScene");
+                SceneManager.LoadScene("ReporterScene");
 #else
 				Application.LoadLevel("ReporterScene");
 #endif
-			}
-			if (GUI.Button(rect4, "Load test1")) {
+            }
+
+            if (GUI.Button(_rect4, "Load test1"))
+            {
 #if UNITY_CHANGE3
-				SceneManager.LoadScene("test1");
+                SceneManager.LoadScene("test1");
 #else
 				Application.LoadLevel("test1");
 #endif
-			}
-			if (GUI.Button(rect5, "Load test2")) {
+            }
+
+            if (GUI.Button(_rect5, "Load test2"))
+            {
 #if UNITY_CHANGE3
-				SceneManager.LoadScene("test2");
+                SceneManager.LoadScene("test2");
 #else
 				Application.LoadLevel("test2");
 #endif
-			}
-			GUI.Label(rect6, "fps : " + reporter.fps.ToString("0.0"), style);
-		}
-	}
+            }
 
+            GUI.Label(_rect6, "fps : " + _reporter.fps.ToString("0.0"), _style);
+        }
+    }
 }

@@ -1,19 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Rotate : MonoBehaviour
 {
-	Vector3 angle;
+    private Vector3 _angle;
 
-	void Start()
-	{
-		angle = transform.eulerAngles;
-	}
+    private void Start()
+    {
+        _angle = transform.eulerAngles;
+    }
 
-	void Update()
-	{
-		angle.y += Time.deltaTime * 100;
-		transform.eulerAngles = angle;
-	}
-
+    private void Update()
+    {
+        _angle.y += Time.deltaTime * 100;
+        transform.eulerAngles = _angle;
+    }
 }
