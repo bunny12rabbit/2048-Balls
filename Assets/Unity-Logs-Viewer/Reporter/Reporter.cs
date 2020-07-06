@@ -317,10 +317,12 @@ public class Reporter : MonoBehaviour
 
     private void Awake()
     {
-#if !(WATCHDOG || CHEAT)
-        gameObject.SetActive(false);
-        return;
-#endif
+        if (!Debug.isDebugBuild)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+        
         if (!initialized)
         {
             Initialize();
