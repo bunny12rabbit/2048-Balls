@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+#pragma warning disable 162
 
 public class NativeTechTools : EditorWindow
 {
@@ -42,7 +43,8 @@ public class NativeTechTools : EditorWindow
     private static void SwitchFullLog()
     {
         _isFullLog = !_isFullLog;
-
+        EditorUserBuildSettings.development = _isFullLog;
+        
         if (_isFullLog)
         {
             AddNewDefine(FULL_LOG);
