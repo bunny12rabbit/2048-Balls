@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 #pragma warning disable 162
 
-public enum DebugColors
+public enum DebugColors : byte
 {
     Black,
     Blue,
@@ -14,7 +14,7 @@ public enum DebugColors
     Teal
 }
 
-public class DebugWrapper
+public static class DebugWrapper
 {
     public static void Log(object message, Object context = default)
     {

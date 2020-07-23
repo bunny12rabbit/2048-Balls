@@ -1,7 +1,11 @@
 ﻿using System;
+using ObjectPools;
+using UnityEngine;
 
 public static class Extensions
 {
+    #region DateTimeExtensions
+
     private static readonly DateTime _epochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
     public static DateTime FromUnixTime(long unixTime) => _epochStart.AddSeconds(unixTime);
@@ -19,4 +23,12 @@ public static class Extensions
     {
         return TimeSpanToString(TimeSpan.FromSeconds(timeSpanInSeconds));
     }
+
+    #endregion
+
+    #region GameObjectExtensions
+
+    public static void PushBackToPool(this GameObject gameObject) => GameObjectPool.PushBackGameObject(gameObject);
+
+    #endregion
 }

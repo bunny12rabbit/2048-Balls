@@ -1,26 +1,7 @@
-﻿using System;
-using UnityEngine;
+﻿using Generics;
 
-public class CoroutineTicker : MonoBehaviour
+public class CoroutineTicker : SingletonBehaviourGeneric<CoroutineTicker>
 {
-    public static CoroutineTicker Instance { get; private set; }
-
-    private void Awake()
-    {
-        InitializeInstance();
-    }
-
-    private void InitializeInstance()
-    {
-        if (Instance)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-    }
-
     private void OnDestroy()
     {
         StopAllCoroutines();
