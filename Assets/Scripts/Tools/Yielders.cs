@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class Yielders
 {
     private class FloatComparer : IEqualityComparer<float>
     {
-        bool IEqualityComparer<float>.Equals(float x, float y) => x == y;
+        bool IEqualityComparer<float>.Equals(float x, float y) => Math.Abs(x - y) < 0.01f;
 
         int IEqualityComparer<float>.GetHashCode(float obj) => obj.GetHashCode();
     }

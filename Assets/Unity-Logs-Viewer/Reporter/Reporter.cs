@@ -409,7 +409,7 @@ public class Reporter : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("tow manager is exists delete the second");
+            DebugWrapper.LogWarning("tow manager is exists delete the second");
             DestroyImmediate(gameObject, true);
             return;
         }
@@ -2158,7 +2158,7 @@ public class Reporter : MonoBehaviour
         if (TotalMemUsage > maxSize)
         {
             Clear();
-            Debug.Log("Memory Usage Reach" + maxSize + " mb So It is Cleared");
+            DebugWrapper.Log("Memory Usage Reach" + maxSize + " mb So It is Cleared");
             return;
         }
 
@@ -2280,10 +2280,10 @@ public class Reporter : MonoBehaviour
 
 #if UNITY_CHANGE3
         _currentScene = SceneManager.GetActiveScene().name;
-        Debug.Log("Scene " + SceneManager.GetActiveScene().name + " is loaded");
+        DebugWrapper.Log("Scene " + SceneManager.GetActiveScene().name + " is loaded");
 #else
 		currentScene = Application.loadedLevelName;
-		Debug.Log("Scene " + Application.loadedLevelName + " is loaded");
+		DebugWrapper.Log("Scene " + Application.loadedLevelName + " is loaded");
 #endif
     }
 
@@ -2351,7 +2351,7 @@ public class Reporter : MonoBehaviour
 
         if (!string.IsNullOrEmpty(www.error))
         {
-            Debug.LogError(www.error);
+            DebugWrapper.LogError(www.error);
         }
         else
         {
@@ -2369,7 +2369,7 @@ public class Reporter : MonoBehaviour
     {
         string filePath = Application.persistentDataPath + "/logs.txt";
         var fileContentsList = new List<string>();
-        Debug.Log("Saving logs to " + filePath);
+        DebugWrapper.Log("Saving logs to " + filePath);
         File.Delete(filePath);
 
         foreach (var log in _logs)
