@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Data
@@ -14,5 +15,8 @@ namespace Data
 
             return matchableDataList[index];
         }
+
+        public List<uint> GetCriteriaRangeToSpawn(uint amount) =>
+            matchableDataList.GetRange(0, (int)amount).Select(t => t.Criteria).ToList();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using Interfaces;
+using Managers;
 using StaticTools;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace Data
         public BallMatchableData(uint number)
         {
             int index = StaticUtilities.GetPowerOfTwo(number) - 1;
-            var data = DataBase.Instance.BallData.GetData(index);
+            var data = GameManager.Instance.DataBase.BallData.GetData(index);
 
             criteria = data.Criteria;
             color = data.Color;
@@ -46,8 +47,8 @@ namespace Data
 
         public void UpdateData()
         {
-            int index = StaticUtilities.GetPowerOfTwo(Criteria == 0 ? 2 : Criteria);
-            var data = DataBase.Instance.BallData.GetData(index);
+            int index = StaticUtilities.GetPowerOfTwo(Criteria == default ? 2 : Criteria);
+            var data = GameManager.Instance.DataBase.BallData.GetData(index);
 
             Criteria = data.Criteria;
             Color = data.Color;

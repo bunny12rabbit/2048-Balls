@@ -33,7 +33,6 @@ namespace InputSystems
 
             if (IsDrag)
             {
-                DebugWrapper.Log($"Delta: {inputPosition}", DebugColors.Gray);
                 UpdateLastPosition();
             
                 OnDrag?.Invoke(inputPosition);

@@ -31,6 +31,7 @@ namespace Generics
         public bool CheckMatch(IMatchableItem<T> matchableItem) => ((MatchableItemItemGeneric<T>)matchableItem).Equals(this);
 
         public abstract void OnMatch(IMatchableItem<T> matchedObject);
+        public abstract void UpdateData(T criteria = default);
 
         #region Equals operators override
 

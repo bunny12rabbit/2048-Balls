@@ -19,7 +19,9 @@ namespace Logic
         [SerializeField] private string vfxPath = "Prefabs/CFX2_RockHit";
 
         private Ball _matchedBall;
+        
         private bool _isInTransition;
+        
         private string _initialName;
 
 
@@ -118,6 +120,7 @@ namespace Logic
         {
             _isInTransition = true;
             UpdateData();
+            
             Tween.LocalScale(SpriteRendererTransform, BallData.LocalScale, 0.2f, 0,
                 Tween.EaseBounce);
             Tween.Color(spriteRenderer, BallData.Color, 0.2f, 0, Tween.EaseInOutStrong, Tween.LoopType.None, null,
@@ -132,16 +135,21 @@ namespace Logic
             SwitchPhysics(true);
         }
 
-        private void UpdateData()
+        public override void UpdateData(uint criteria = default)
         {
-            if (Data == null)
+            if (criteria == default)
             {
-                Data = new BallMatchableData(2);
-                _initialName = name;
+                if (Data == null)
+                {
+                    return;
+                }
+
+                Data.UpdateData();
             }
             else
             {
-                Data.UpdateData();
+                Data = new BallMatchableData(criteria);
+                _initialName = name;
             }
 
             label.text = Data.Criteria.ToString();
@@ -149,6 +157,7 @@ namespace Logic
             if (!_isInTransition)
             {
                 spriteRenderer.color = BallData.Color;
+                SpriteRendererTransform.localScale = BallData.LocalScale;
             }
 
             name = _initialName + Data.Criteria;

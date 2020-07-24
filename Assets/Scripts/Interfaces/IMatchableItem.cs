@@ -13,4 +13,6 @@
     bool CheckMatch(IMatchableItem<T> matchableItem);
 
     void OnMatch(IMatchableItem<T> matchedObject);
-}
+
+    void UpdateData(T criteria = default);
+ }

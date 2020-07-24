@@ -1,9 +1,10 @@
-﻿using Generics;
+﻿using System;
 using UnityEngine;
 
 namespace Data
 {
-    public class DataBase : SingletonBehaviourGeneric<DataBase>
+    [Serializable]
+    public struct DataBase
     {
         public BallData BallData => ballData;
 

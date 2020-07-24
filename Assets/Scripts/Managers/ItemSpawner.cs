@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Factories;
 using Generics;
 using InputSystems;
@@ -17,7 +18,9 @@ namespace Managers
         [Space] [SerializeField] private string itemPath = "Prefabs/Ball";
 
 
-        private MatchableItemFactoryGeneric<uint> _factory = new MatchableItemFactoryGeneric<uint>();
+        private readonly MatchableItemFactoryGeneric<uint> _factory = new MatchableItemFactoryGeneric<uint>();
+
+        private List<uint> _criteriaRangeToSpawn = new List<uint>();
 
         private bool _isSpawnRunning;
 
@@ -25,6 +28,8 @@ namespace Managers
         private void Start()
         {
             InputListener.OnRelease += OnNeedToSpawnNewItem;
+
+            _criteriaRangeToSpawn = GameManager.Instance.GetCriteriaRangeToSpawn();
             SpawnNewItem();
         }
 
@@ -35,7 +40,8 @@ namespace Managers
 
         private void SpawnNewItem()
         {
-            var item = _factory.ConstructItem(itemPath, spawnPoint.position);
+            uint randomItemCriteria = GetRandomItemCriteria();
+            var item = _factory.ConstructItem(itemPath, spawnPoint.position, randomItemCriteria);
             InputController.Instance.UpdateTarget((Ball)item);
         }
 
@@ -58,5 +64,7 @@ namespace Managers
 
             _isSpawnRunning = false;
         }
+
+        private uint GetRandomItemCriteria() => _criteriaRangeToSpawn[Random.Range(0, _criteriaRangeToSpawn.Count)];
     }
 }
