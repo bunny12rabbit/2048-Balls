@@ -11,7 +11,7 @@ namespace Data
 
         public BallMatchableData GetData(int index)
         {
-            index = Mathf.Clamp(index, 0, matchableDataList.Count);
+            index = Mathf.Clamp(index, 0, matchableDataList.Count - 1);
 
             return matchableDataList[index];
         }
