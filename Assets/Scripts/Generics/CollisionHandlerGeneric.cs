@@ -5,8 +5,8 @@ namespace Generics
     public abstract class CollisionHandlerGeneric<T> : MonoBehaviour where T : struct
     {
         private const float FORCE_AMOUNT = 500f;
-        
-        
+
+
         [SerializeField] private TagsManager.Tags comparingTag;
 
         [SerializeField] private float gravityScale = 1.7f;
@@ -34,11 +34,21 @@ namespace Generics
 
         protected void OnCollisionEnter2D(Collision2D other)
         {
+            ProcessCollision(other);
+        }
+
+        private void OnCollisionStay2D(Collision2D other)
+        {
+            ProcessCollision(other);
+        }
+
+        private void ProcessCollision(Collision2D other)
+        {
             if (!other.gameObject.CompareTag(TagsManager.GetTag(comparingTag)))
             {
                 return;
             }
-        
+
             var otherMatchable = other.transform.GetComponent<IMatchableItem<T>>();
 
             if (otherMatchable != null)
