@@ -9,11 +9,13 @@ namespace Managers
     {
         [SerializeField] private DataBase dataBase;
 
-        [SerializeField] private uint rangeToSpawnCount = 4;
+        [SerializeField] private int rangeToSpawnCount = 4;
         
         
         public DataBase DataBase => dataBase;
 
-        public List<uint> GetCriteriaRangeToSpawn() => DataBase.BallData.GetCriteriaRangeToSpawn(rangeToSpawnCount);
+        public int RangeToSpawnCount => rangeToSpawnCount;
+
+        public List<uint> GetCriteriaRangeToSpawn() => DataBase.BallData.GetCriteriaRangeToSpawn(RangeToSpawnCount);
     }
 }

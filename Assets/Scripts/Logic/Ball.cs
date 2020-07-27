@@ -1,6 +1,7 @@
 ﻿using Data;
 using Generics;
 using InputSystems;
+using Managers;
 using ObjectPools;
 using Pixelplacement;
 using TMPro;
@@ -120,6 +121,8 @@ namespace Logic
         {
             _isInTransition = true;
             UpdateData();
+            
+            ItemSpawner.Instance.UpdateMaxSpawnedCriteria(Data.Criteria);
             
             Tween.LocalScale(SpriteRendererTransform, BallData.LocalScale, 0.2f, 0,
                 Tween.EaseBounce);

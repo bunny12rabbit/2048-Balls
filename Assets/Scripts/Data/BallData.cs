@@ -16,7 +16,7 @@ namespace Data
             return matchableDataList[index];
         }
 
-        public List<uint> GetCriteriaRangeToSpawn(uint amount) =>
-            matchableDataList.GetRange(0, (int)amount).Select(t => t.Criteria).ToList();
+        public List<uint> GetCriteriaRangeToSpawn(int amount) =>
+            matchableDataList.GetRange(0, amount).Select(t => t.Criteria).ToList();
     }
 }

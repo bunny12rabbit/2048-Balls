@@ -23,6 +23,7 @@ namespace Managers
         private List<uint> _criteriaRangeToSpawn = new List<uint>();
 
         private bool _isSpawnRunning;
+        private uint _maxSpawnedCriteria;
 
 
         private void Start()
@@ -42,7 +43,19 @@ namespace Managers
         {
             uint randomItemCriteria = GetRandomItemCriteria();
             var item = _factory.ConstructItem(itemPath, spawnPoint.position, randomItemCriteria);
+
             InputController.Instance.UpdateTarget((Ball)item);
+        }
+
+        public void UpdateMaxSpawnedCriteria(uint criteria)
+        {
+            bool isNewMax = criteria > _maxSpawnedCriteria &&
+                            criteria <= _criteriaRangeToSpawn[GameManager.Instance.RangeToSpawnCount - 1];
+
+            if (isNewMax)
+            {
+                _maxSpawnedCriteria = criteria;
+            }
         }
 
         private void SpawnNewItemWithDelay(float delay)
@@ -65,6 +78,10 @@ namespace Managers
             _isSpawnRunning = false;
         }
 
-        private uint GetRandomItemCriteria() => _criteriaRangeToSpawn[Random.Range(0, _criteriaRangeToSpawn.Count)];
+        private uint GetRandomItemCriteria()
+        {
+            int maxIndex = _criteriaRangeToSpawn.IndexOf(_maxSpawnedCriteria) + 1;
+            return _criteriaRangeToSpawn[Random.Range(0, maxIndex)];
+        }
     }
 }
