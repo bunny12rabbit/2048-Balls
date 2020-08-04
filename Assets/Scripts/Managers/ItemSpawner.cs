@@ -36,6 +36,11 @@ namespace Managers
 
         private void OnNeedToSpawnNewItem()
         {
+            if (GameManager.Instance.IsWin)
+            {
+                return;
+            }
+            
             SpawnNewItemWithDelay(SPAWN_DELAY);
         }
 

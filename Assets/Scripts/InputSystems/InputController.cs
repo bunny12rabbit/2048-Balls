@@ -7,6 +7,9 @@ namespace InputSystems
 {
     public class InputController : SingletonBehaviourGeneric<InputController>, IInputHandler
     {
+        [SerializeField] private float sensitivity = 700f;
+        
+        
         [SerializeField] private Camera mainCamera;
 
         private Ball _target;
@@ -19,7 +22,9 @@ namespace InputSystems
 
         private bool _isControlled;
         private bool _isCanControl;
-        
+
+
+        public static float Sensitivity => Instance.sensitivity; 
 
         private void OnEnable()
         {
@@ -66,7 +71,6 @@ namespace InputSystems
             }
 
             _newPosition = GetNewWorldPosition(position) - _offset;
-            DebugWrapper.Log($"WorldPosition: {_newPosition}", DebugColors.Green);
         }
 
         public void OnRelease()

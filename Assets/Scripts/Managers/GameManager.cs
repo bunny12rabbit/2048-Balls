@@ -10,12 +10,20 @@ namespace Managers
         [SerializeField] private DataBase dataBase;
 
         [SerializeField] private int rangeToSpawnCount = 4;
-        
-        
+
+
         public DataBase DataBase => dataBase;
 
         public int RangeToSpawnCount => rangeToSpawnCount;
+        
+        public bool IsWin { get; private set; }
 
         public List<uint> GetCriteriaRangeToSpawn() => DataBase.BallData.GetCriteriaRangeToSpawn(RangeToSpawnCount);
+
+        public void WinGame()
+        {
+            IsWin = true;
+            GameFieldManager.OpenGates();
+        }
     }
 }

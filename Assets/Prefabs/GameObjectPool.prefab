@@ -50,3 +50,6 @@ MonoBehaviour:
   - prefabName: Prefabs/CFX2_RockHit
     timeToLive: 3
     prewarmCount: 5
+  - prefabName: Prefabs/CFX_MagicPoof
+    timeToLive: 3
+    prewarmCount: 1

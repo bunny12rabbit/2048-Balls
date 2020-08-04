@@ -1,19 +1,17 @@
-﻿using UnityEngine;
+﻿using InputSystems;
+using UnityEngine;
 
 namespace Generics
 {
     public abstract class CollisionHandlerGeneric<T> : MonoBehaviour where T : struct
     {
-        private const float FORCE_AMOUNT = 500f;
-
-
         [SerializeField] private TagsManager.Tags comparingTag;
 
         [SerializeField] private float gravityScale = 1.7f;
 
-        [SerializeField] private Collider2D myCollider;
-
         [SerializeField] private Rigidbody2D myRigidbody;
+
+        [SerializeField] private LayerMask layerMask;
 
 
         private MatchableItemItemGeneric<T> _matchable;
@@ -32,6 +30,13 @@ namespace Generics
 
         public void SwitchPhysicsSimulation(bool state) => myRigidbody.gravityScale = !state ? 0 : gravityScale;
 
+        public void MoveToPosition(Vector3 initialRigidbodyPosition, Vector3 newPositionOffset)
+        {
+            var position = myRigidbody.transform.position;
+            myRigidbody.velocity = new Vector2(initialRigidbodyPosition.x + newPositionOffset.x - position.x, 0) *
+                                   (InputController.Sensitivity * Time.fixedDeltaTime);
+        }
+
         protected void OnCollisionEnter2D(Collision2D other)
         {
             ProcessCollision(other);
@@ -44,12 +49,10 @@ namespace Generics
 
         private void ProcessCollision(Collision2D other)
         {
-            if (!other.gameObject.CompareTag(TagsManager.GetTag(comparingTag)))
+            if (!TryGetIMatchable(other, out var otherMatchable))
             {
                 return;
             }
-
-            var otherMatchable = other.transform.GetComponent<IMatchableItem<T>>();
 
             if (otherMatchable != null)
             {
@@ -57,11 +60,16 @@ namespace Generics
             }
         }
 
-        public void MoveToPosition(Vector3 initialRigidbodyPosition, Vector3 newPositionOffset)
+        private bool TryGetIMatchable(Collision2D other, out IMatchableItem<T> otherMatchable)
         {
-            var position = myRigidbody.transform.position;
-            myRigidbody.velocity = new Vector2(initialRigidbodyPosition.x + newPositionOffset.x - position.x, 0) *
-                                   (FORCE_AMOUNT * Time.fixedDeltaTime);
+            if (!other.gameObject.CompareTag(TagsManager.GetTag(comparingTag)))
+            {
+                otherMatchable = null;
+                return false;
+            }
+
+            otherMatchable = other.transform.GetComponent<IMatchableItem<T>>();
+            return true;
         }
     }
 }

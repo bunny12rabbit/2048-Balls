@@ -18,5 +18,7 @@ namespace Data
 
         public List<uint> GetCriteriaRangeToSpawn(int amount) =>
             matchableDataList.GetRange(0, amount).Select(t => t.Criteria).ToList();
+
+        public uint GetMaxCriteriaAvailable() => matchableDataList.Max(t => t.Criteria);
     }
 }

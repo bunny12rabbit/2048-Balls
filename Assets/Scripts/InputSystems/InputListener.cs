@@ -12,8 +12,6 @@ namespace InputSystems
         [SerializeField] private float threshold = 2f;
 
 
-        private Vector2 _lastInputPosition;
-
         private float SqrThreshold => threshold * threshold;
         private static bool IsPressed => Input.GetMouseButtonDown(0);
         private static bool IsReleased => Input.GetMouseButtonUp(0);
@@ -26,15 +24,11 @@ namespace InputSystems
 
             if (IsPressed)
             {
-                UpdateLastPosition();
-            
                 OnPress?.Invoke(inputPosition);
             }
 
             if (IsDrag)
             {
-                UpdateLastPosition();
-            
                 OnDrag?.Invoke(inputPosition);
             }
 
@@ -42,11 +36,6 @@ namespace InputSystems
             {
                 OnRelease?.Invoke();
             }
-        }
-
-        private void UpdateLastPosition()
-        {
-            _lastInputPosition = Input.mousePosition;
         }
     }
 }

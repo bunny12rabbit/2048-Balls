@@ -6,12 +6,12 @@ namespace Generics
     public abstract class MatchableItemItemGeneric<T> : MonoBehaviour, IMatchableItem<T> where T : struct
     {
         public new Transform transform { get; private set; }
-        
+
         public abstract CollisionHandlerGeneric<T> CollisionHandler { get; protected set; }
-        
+
         public virtual IMatchableData<T> Data { get; protected set; }
 
-        
+
         protected virtual void Awake()
         {
             transform = GetComponent<Transform>();
@@ -28,14 +28,14 @@ namespace Generics
 
         public abstract void InitializeComponents();
 
-        public bool CheckMatch(IMatchableItem<T> matchableItem) => ((MatchableItemItemGeneric<T>)matchableItem).Equals(this);
+        public bool CheckMatch(IMatchableItem<T> matchableItem) => Equals((MatchableItemItemGeneric<T>)matchableItem);
 
         public abstract void OnMatch(IMatchableItem<T> matchedObject);
         public abstract void UpdateData(T criteria = default);
 
         #region Equals operators override
 
-        public override bool Equals(object other) => (MatchableItemItemGeneric<T>)other == this;
+        public override bool Equals(object other) => this == (MatchableItemItemGeneric<T>)other;
 
         public override int GetHashCode() => base.GetHashCode();
 

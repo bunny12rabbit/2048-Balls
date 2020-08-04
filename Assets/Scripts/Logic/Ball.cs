@@ -11,6 +11,10 @@ namespace Logic
 {
     public class Ball : MatchableItemItemGeneric<uint>
     {
+        private const float HEIGHT_DIFFERENCE = 0.1f;
+
+        #region Variables
+
         [SerializeField] private TMP_Text label;
         [SerializeField] private CollisionHandlerNumeric collisionHandler;
         [SerializeField] private LineRenderer lineRenderer;
@@ -18,15 +22,18 @@ namespace Logic
 
         [SerializeField] private float moveTowardsDuration = 0.5f;
         [SerializeField] private string vfxPath = "Prefabs/CFX2_RockHit";
+        [SerializeField] private string winVfxPath = "Prefabs/CFX_MagicPoof";
 
         private Ball _matchedBall;
-        
-        private bool _isInTransition;
-        
+
         private string _initialName;
+        private Color _previousColor;
 
+        #endregion
 
-        public BallMatchableData BallData => (BallMatchableData)Data;
+        #region Properties
+
+        private BallMatchableData BallData => (BallMatchableData)Data;
         private Transform SpriteRendererTransform { get; set; }
 
 
@@ -35,6 +42,8 @@ namespace Logic
             get => collisionHandler;
             protected set => collisionHandler = (CollisionHandlerNumeric)value;
         }
+
+        #endregion
 
         public override void OnMatch(IMatchableItem<uint> matchedObject)
         {
@@ -71,7 +80,7 @@ namespace Logic
 
         private void SetDefaultState()
         {
-            _isInTransition = false;
+            SwitchPhysics(true);
             _matchedBall = null;
             Data = null;
 
@@ -85,21 +94,32 @@ namespace Logic
 
         private void MatchBalls(IMatchableItem<uint> matchedBall)
         {
-            if (matchedBall.Data.IsMatched)
+            if (IsInvalidMatch())
             {
                 return;
             }
 
             Data.IsMatched = true;
-
             SwitchPhysics(false);
             _matchedBall = (Ball)matchedBall;
             _matchedBall.SwitchPhysics(false);
+            _matchedBall.Data.IsMatched = true;
 
-            DebugWrapper.LogError(
-                $"{name}.IsMatched={Data.IsMatched} collides with {_matchedBall.gameObject.name}.IsMatched={_matchedBall.Data.IsMatched}",
-                DebugColors.Red);
+            DebugWrapper.Log(
+                $"<color=green>{name}.IsMatched={Data.IsMatched}</color> collides with " +
+                $"<color=blue>{_matchedBall.gameObject.name}.IsMatched={_matchedBall.Data.IsMatched}</color>");
+
             MoveTowardsOther(_matchedBall);
+
+            bool IsInvalidMatch()
+            {
+                var position = transform.position;
+                var matchedBallPosition = matchedBall.transform.position;
+
+                return GameManager.Instance.IsWin || matchedBall.Data.IsMatched ||
+                       Mathf.Abs(position.y - matchedBallPosition.y) > HEIGHT_DIFFERENCE &&
+                       position.y - matchedBallPosition.y < HEIGHT_DIFFERENCE;
+            }
         }
 
         private void MoveTowardsOther(IMatchableItem<uint> matchedBall)
@@ -110,32 +130,51 @@ namespace Logic
 
         private void OnMoveTweenAnimationComplete()
         {
-            GameObjectPool.GetObjectFromPool(vfxPath, transform.position, Quaternion.identity);
+            UpdateData();
+
+            bool isWinCondition = IsWinCondition();
+
+            if (isWinCondition)
+            {
+                GameManager.Instance.WinGame();
+            }
+
+            SpawnVfx();
+
+            ItemSpawner.Instance.UpdateMaxSpawnedCriteria(Data.Criteria);
+            PushMatchedBallBackToPool();
+            ResetBallState();
+            SwitchPhysics(true);
+        }
+
+        private void PushMatchedBallBackToPool()
+        {
+            _matchedBall.gameObject.name = _initialName;
             _matchedBall.gameObject.PushBackToPool();
-            StartBallTransition();
+        }
+
+        private void SpawnVfx()
+        {
+            var vfx = GameObjectPool.GetObjectFromPool(GameManager.Instance.IsWin ? winVfxPath : vfxPath,
+                transform.position, Quaternion.identity);
+
+            var particleSystemManager = vfx.GetComponent<ParticleSystemManager>();
+
+            if (particleSystemManager)
+            {
+                particleSystemManager.ChangeColor(_previousColor);
+            }
         }
 
         private void SwitchPhysics(bool state) => CollisionHandler.SwitchPhysics(state);
 
-        private void StartBallTransition()
-        {
-            _isInTransition = true;
-            UpdateData();
-            
-            ItemSpawner.Instance.UpdateMaxSpawnedCriteria(Data.Criteria);
-            
-            Tween.LocalScale(SpriteRendererTransform, BallData.LocalScale, 0.2f, 0,
-                Tween.EaseBounce);
-            Tween.Color(spriteRenderer, BallData.Color, 0.2f, 0, Tween.EaseInOutStrong, Tween.LoopType.None, null,
-                OnTransitionTweenComplete);
-        }
+        private bool IsWinCondition() =>
+            Data?.Criteria >= GameManager.Instance.DataBase.BallData.GetMaxCriteriaAvailable();
 
-        private void OnTransitionTweenComplete()
+        private void ResetBallState()
         {
-            _isInTransition = false;
             Data.IsMatched = false;
             _matchedBall = null;
-            SwitchPhysics(true);
         }
 
         public override void UpdateData(uint criteria = default)
@@ -147,6 +186,7 @@ namespace Logic
                     return;
                 }
 
+                _previousColor = BallData.Color;
                 Data.UpdateData();
             }
             else
@@ -156,13 +196,8 @@ namespace Logic
             }
 
             label.text = Data.Criteria.ToString();
-
-            if (!_isInTransition)
-            {
-                spriteRenderer.color = BallData.Color;
-                SpriteRendererTransform.localScale = BallData.LocalScale;
-            }
-
+            spriteRenderer.color = BallData.Color;
+            SpriteRendererTransform.localScale = BallData.LocalScale;
             name = _initialName + Data.Criteria;
         }
     }

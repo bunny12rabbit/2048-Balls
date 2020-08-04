@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -504,8 +505,9 @@ MonoBehaviour:
   collisionHandler: {fileID: 5072597920244265456}
   lineRenderer: {fileID: 960369977109652576}
   spriteRenderer: {fileID: 8133753344307872557}
-  moveTowardsDuration: 0.5
+  moveTowardsDuration: 0.2
   vfxPath: Prefabs/CFX2_RockHit
+  winVfxPath: Prefabs/CFX_MagicPoof
 --- !u!114 &5072597920244265456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,5 +522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comparingTag: 1
   gravityScale: 2
-  myCollider: {fileID: 7202015361844987163}
   myRigidbody: {fileID: 5794857727498163854}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 512
