@@ -13,9 +13,9 @@ namespace Managers
         private const float SPAWN_DELAY = 1f;
 
 
-        [SerializeField] private Transform spawnPoint;
+        [SerializeField] private string itemPath = "Prefabs/Ball";
 
-        [Space] [SerializeField] private string itemPath = "Prefabs/Ball";
+        [SerializeField] private Transform spawnPoint;
 
 
         private readonly MatchableItemFactoryGeneric<uint> _factory = new MatchableItemFactoryGeneric<uint>();
@@ -26,6 +26,17 @@ namespace Managers
         private uint _maxSpawnedCriteria;
 
 
+        public void UpdateMaxSpawnedCriteria(uint criteria)
+        {
+            bool isNewMax = criteria > _maxSpawnedCriteria &&
+                            criteria <= _criteriaRangeToSpawn[GameManager.Instance.RangeToSpawnCount - 1];
+
+            if (isNewMax)
+            {
+                _maxSpawnedCriteria = criteria;
+            }
+        }
+        
         private void Start()
         {
             InputListener.OnRelease += OnNeedToSpawnNewItem;
@@ -40,27 +51,8 @@ namespace Managers
             {
                 return;
             }
-            
+
             SpawnNewItemWithDelay(SPAWN_DELAY);
-        }
-
-        private void SpawnNewItem()
-        {
-            uint randomItemCriteria = GetRandomItemCriteria();
-            var item = _factory.ConstructItem(itemPath, spawnPoint.position, randomItemCriteria);
-
-            InputController.Instance.UpdateTarget((Ball)item);
-        }
-
-        public void UpdateMaxSpawnedCriteria(uint criteria)
-        {
-            bool isNewMax = criteria > _maxSpawnedCriteria &&
-                            criteria <= _criteriaRangeToSpawn[GameManager.Instance.RangeToSpawnCount - 1];
-
-            if (isNewMax)
-            {
-                _maxSpawnedCriteria = criteria;
-            }
         }
 
         private void SpawnNewItemWithDelay(float delay)
@@ -81,6 +73,14 @@ namespace Managers
             SpawnNewItem();
 
             _isSpawnRunning = false;
+        }
+
+        private void SpawnNewItem()
+        {
+            uint randomItemCriteria = GetRandomItemCriteria();
+            var item = _factory.ConstructItem(itemPath, spawnPoint.position, randomItemCriteria);
+            
+            InputController.Instance.UpdateTarget((Ball)item);
         }
 
         private uint GetRandomItemCriteria()

@@ -99,11 +99,13 @@ namespace Logic
                 return;
             }
 
-            Data.IsMatched = true;
-            SwitchPhysics(false);
             _matchedBall = (Ball)matchedBall;
-            _matchedBall.SwitchPhysics(false);
+
             _matchedBall.Data.IsMatched = true;
+            _matchedBall.SwitchPhysics(false);
+
+            SwitchPhysics(false);
+            Data.IsMatched = true;
 
             DebugWrapper.Log(
                 $"<color=green>{name}.IsMatched={Data.IsMatched}</color> collides with " +
@@ -117,6 +119,7 @@ namespace Logic
                 var matchedBallPosition = matchedBall.transform.position;
 
                 return GameManager.Instance.IsWin || matchedBall.Data.IsMatched ||
+                       _matchedBall != null && !ReferenceEquals(matchedBall, _matchedBall) ||
                        Mathf.Abs(position.y - matchedBallPosition.y) > HEIGHT_DIFFERENCE &&
                        position.y - matchedBallPosition.y < HEIGHT_DIFFERENCE;
             }
@@ -131,6 +134,7 @@ namespace Logic
         private void OnMoveTweenAnimationComplete()
         {
             UpdateData();
+            AudioManager.Instance.PlayFxSound(AudioFxTypes.Collapse);
 
             bool isWinCondition = IsWinCondition();
 

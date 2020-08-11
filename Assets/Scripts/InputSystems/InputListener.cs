@@ -1,9 +1,10 @@
 ﻿using System;
+using Generics;
 using UnityEngine;
 
 namespace InputSystems
 {
-    public class InputListener : MonoBehaviour
+    public class InputListener : SingletonBehaviourGeneric<InputListener>
     {
         public static event Action<Vector3> OnPress;
         public static event Action<Vector3> OnDrag;
