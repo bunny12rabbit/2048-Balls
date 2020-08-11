@@ -28,7 +28,20 @@ public static class Extensions
 
     #region GameObjectExtensions
 
+    /// <summary>
+    /// Push this gameObject back to GameObjectPool
+    /// </summary>
+    /// <param name="gameObject">gameObject to push back</param>
     public static void PushBackToPool(this GameObject gameObject) => GameObjectPool.PushBackGameObject(gameObject);
+
+    /// <summary>
+    /// Trying to get component on this gameObject, if there's none, adding this component and returning it 
+    /// </summary>
+    /// <param name="gameObject">gameObject to look component on</param>
+    /// <typeparam name="T">Component type</typeparam>
+    /// <returns>Found or added component</returns>
+    public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component =>
+        gameObject.GetComponent<T>() ?? gameObject.AddComponent<T>();
 
     #endregion
 }
