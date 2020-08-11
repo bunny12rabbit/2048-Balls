@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using static Constants;
 
 namespace Logic
 {
@@ -7,8 +7,8 @@ namespace Logic
     public class DeathZoneHandler : MonoBehaviour
     {
         [SerializeField] private Collider2D trigger;
-        
-        [SerializeField] private TagsManager.Tags comparingTag;
+
+        [SerializeField] private TagsNames.Tags comparingTag;
 
 
         private void OnValidate()
@@ -28,13 +28,13 @@ namespace Logic
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.gameObject.CompareTag(TagsManager.GetTag(comparingTag)))
+            if (!other.gameObject.CompareTag(TagsNames.GetTag(comparingTag)))
             {
                 return;
             }
-            
+
             var parent = other.transform.parent;
-            
+
             if (parent)
             {
                 parent.gameObject.PushBackToPool();

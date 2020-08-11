@@ -1,11 +1,12 @@
 ﻿using InputSystems;
 using UnityEngine;
+using static Constants;
 
 namespace Generics
 {
     public abstract class CollisionHandlerGeneric<T> : MonoBehaviour where T : struct
     {
-        [SerializeField] private TagsManager.Tags comparingTag;
+        [SerializeField] private TagsNames.Tags comparingTag;
 
         [SerializeField] private float gravityScale = 1.7f;
 
@@ -62,7 +63,7 @@ namespace Generics
 
         private bool TryGetIMatchable(Collision2D other, out IMatchableItem<T> otherMatchable)
         {
-            if (!other.gameObject.CompareTag(TagsManager.GetTag(comparingTag)))
+            if (!other.gameObject.CompareTag(TagsNames.GetTag(comparingTag)))
             {
                 otherMatchable = null;
                 return false;
