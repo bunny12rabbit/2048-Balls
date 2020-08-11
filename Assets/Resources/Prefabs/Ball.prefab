@@ -164,7 +164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.006, y: -0.077}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 21.39, y: 6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &105568316375185298
@@ -185,7 +185,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -4562673934397823248, guid: 70db57f651a425e4e81e3dd6823e0598, type: 2}
+  - {fileID: -5963328987595430331, guid: 9fcde35dc0de9b1449d9e65ea862fc98, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -243,8 +243,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 2
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 70db57f651a425e4e81e3dd6823e0598, type: 2}
-  m_sharedMaterial: {fileID: -4562673934397823248, guid: 70db57f651a425e4e81e3dd6823e0598,
+  m_fontAsset: {fileID: 11400000, guid: 9fcde35dc0de9b1449d9e65ea862fc98, type: 2}
+  m_sharedMaterial: {fileID: -5963328987595430331, guid: 9fcde35dc0de9b1449d9e65ea862fc98,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -270,12 +270,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 19.1
+  m_fontSize: 22.55
   m_fontSizeBase: 11
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 11
-  m_fontSizeMax: 20
+  m_fontSizeMax: 24
   m_fontStyle: 1
   m_textAlignment: 514
   m_characterSpacing: 5.8
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
-  m_enableKerning: 1
+  m_enableKerning: 0
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 9.247862, y: 1.8918959, z: 9.412962, w: 1.8065417}
+  m_margin: {x: 8.854334, y: 1.5803932, z: 8.845873, w: 1.6507909}
   m_textInfo:
     textComponent: {fileID: 2547926619270176564}
     characterCount: 1
@@ -406,7 +406,7 @@ SpriteRenderer:
   m_SortingLayerID: -744343121
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 67732d539518e294a85e751fb32c1fc2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1161a1af7c3ad6d4fb3546a232f72503, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -430,9 +430,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04, y: -0.06}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 1
 --- !u!1 &8168122539227396952
 GameObject:
   m_ObjectHideFlags: 0
