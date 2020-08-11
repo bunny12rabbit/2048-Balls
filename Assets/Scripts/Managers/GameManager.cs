@@ -23,7 +23,16 @@ namespace Managers
         public void WinGame()
         {
             IsWin = true;
+            
+            AudioManager.Instance.PlayFxSound(AudioFxTypes.Win);
             GameFieldManager.OpenGates();
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            QualitySettings.vSyncCount = 1;
         }
     }
 }

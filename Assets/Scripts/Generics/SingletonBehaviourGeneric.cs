@@ -6,7 +6,7 @@ namespace Generics
     {
         public static T Instance { get; private set; }
         
-        protected void Awake()
+        protected virtual void Awake()
         {
             InitializeInstance();
         }
