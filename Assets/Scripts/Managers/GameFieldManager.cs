@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Generics;
+using UnityEngine;
 
 namespace Managers
 {
@@ -8,6 +9,10 @@ namespace Managers
 
         [SerializeField] private Rigidbody2D gatesLeftHinge;
         [SerializeField] private Rigidbody2D gatesRightHinge;
+
+        [SerializeField] private Transform ballLockSpawnPoint;
+
+        private MatchableItemGeneric<uint> _ballLock;
 
 
         public static void OpenGates()
@@ -20,14 +25,16 @@ namespace Managers
                 return;
             }
 
+            _instance._ballLock.SpawnWinVfx();
+            _instance._ballLock.gameObject.PushBackToPool();
+
             _instance.gatesLeftHinge.isKinematic = false;
             _instance.gatesRightHinge.isKinematic = false;
         }
 
-        private void Awake()
-        {
-            InitializeInstance();
-        }
+        private void Awake() => InitializeInstance();
+
+        private void Start() => _ballLock = ItemSpawner.Instance.SpawnBallLock(ballLockSpawnPoint.position);
 
         private void InitializeInstance()
         {

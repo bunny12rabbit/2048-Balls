@@ -15,9 +15,9 @@ namespace Generics
         [SerializeField] private LayerMask layerMask;
 
 
-        private MatchableItemItemGeneric<T> _matchable;
+        private MatchableItemGeneric<T> _matchable;
 
-        public void Initialize(MatchableItemItemGeneric<T> matchable)
+        public void Initialize(MatchableItemGeneric<T> matchable)
         {
             _matchable = matchable;
         }

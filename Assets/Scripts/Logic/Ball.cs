@@ -9,33 +9,24 @@ using UnityEngine;
 
 namespace Logic
 {
-    public class Ball : MatchableItemItemGeneric<uint>
+    public class Ball : MatchableItemGeneric<uint>
     {
         private const float HEIGHT_DIFFERENCE = 0.1f;
 
         #region Variables
 
-        [SerializeField] private TMP_Text label;
         [SerializeField] private CollisionHandlerNumeric collisionHandler;
         [SerializeField] private LineRenderer lineRenderer;
-        [SerializeField] private SpriteRenderer spriteRenderer;
 
         [SerializeField] private float moveTowardsDuration = 0.5f;
-        [SerializeField] private string vfxPath = "Prefabs/CFX2_RockHit";
-        [SerializeField] private string winVfxPath = "Prefabs/CFX_MagicPoof";
 
         private Ball _matchedBall;
 
         private string _initialName;
-        private Color _previousColor;
 
         #endregion
 
-        #region Properties
-
         private BallMatchableData BallData => (BallMatchableData)Data;
-        private Transform SpriteRendererTransform { get; set; }
-
 
         public override CollisionHandlerGeneric<uint> CollisionHandler
         {
@@ -43,28 +34,16 @@ namespace Logic
             protected set => collisionHandler = (CollisionHandlerNumeric)value;
         }
 
-        #endregion
-
         public override void OnMatch(IMatchableItem<uint> matchedObject)
         {
             MatchBalls(matchedObject);
         }
-
-
-        public override void InitializeComponents()
+        
+        public void SetLineRendererActive(bool state)
         {
-            if (CollisionHandler)
-            {
-                CollisionHandler.Initialize(this);
-            }
-            else
-            {
-                DebugWrapper.LogError($"{nameof(CollisionHandler)} is not found! Assign the reference!",
-                    DebugColors.Red);
-            }
-
-            SpriteRendererTransform = spriteRenderer.GetComponent<Transform>();
+            lineRenderer.enabled = state;
         }
+        
 
         private void OnEnable()
         {
@@ -84,12 +63,12 @@ namespace Logic
             _matchedBall = null;
             Data = null;
 
-            lineRenderer.enabled = true;
+            SetLineRendererActive(true);
         }
 
         private void OnRelease()
         {
-            lineRenderer.enabled = false;
+            SetLineRendererActive(false);
         }
 
         private void MatchBalls(IMatchableItem<uint> matchedBall)
@@ -146,7 +125,7 @@ namespace Logic
                 AudioManager.Instance.PlayFxSound(AudioFxTypes.Collapse);
             }
 
-            SpawnVfx();
+            SpawnMatchVfx();
 
             ItemSpawner.Instance.UpdateMaxSpawnedCriteria(Data.Criteria);
             PushMatchedBallBackToPool();
@@ -158,19 +137,6 @@ namespace Logic
         {
             _matchedBall.gameObject.name = _initialName;
             _matchedBall.gameObject.PushBackToPool();
-        }
-
-        private void SpawnVfx()
-        {
-            var vfx = GameObjectPool.GetObjectFromPool(GameManager.Instance.IsWin ? winVfxPath : vfxPath,
-                transform.position, Quaternion.identity);
-
-            var particleSystemManager = vfx.GetComponent<ParticleSystemManager>();
-
-            if (particleSystemManager)
-            {
-                particleSystemManager.ChangeColor(_previousColor);
-            }
         }
 
         private void SwitchPhysics(bool state) => CollisionHandler.SwitchPhysics(state);
@@ -193,7 +159,7 @@ namespace Logic
                     return;
                 }
 
-                _previousColor = BallData.Color;
+                previousColor = BallData.Color;
                 Data.UpdateData();
             }
             else
@@ -204,8 +170,9 @@ namespace Logic
 
             label.text = Data.Criteria.ToString();
             spriteRenderer.color = BallData.Color;
-            SpriteRendererTransform.localScale = BallData.LocalScale;
             name = _initialName + Data.Criteria;
+            
+            UpdateLocalScale(BallData.LocalScale);
         }
     }
 }

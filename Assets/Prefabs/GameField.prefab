@@ -120,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gatesLeftHinge: {fileID: 2937761468885588718}
   gatesRightHinge: {fileID: 554688528919599318}
+  ballLockSpawnPoint: {fileID: 2656789584837785114}
 --- !u!1 &7457548553415739703
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +366,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7457548553109770586}
     m_Modifications:
+    - target: {fileID: 1181307548540400519, guid: bd5be142f341bea44b203f55e276e3f2,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 2288394284373368832, guid: bd5be142f341bea44b203f55e276e3f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -442,6 +449,12 @@ Rigidbody2D:
 --- !u!50 &554688528919599318 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 5361907938563914193, guid: bd5be142f341bea44b203f55e276e3f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5610346710519668999}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2656789584837785114 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7567494978423281437, guid: bd5be142f341bea44b203f55e276e3f2,
     type: 3}
   m_PrefabInstance: {fileID: 5610346710519668999}
   m_PrefabAsset: {fileID: 0}

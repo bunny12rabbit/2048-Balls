@@ -44,4 +44,26 @@ public static class Extensions
         gameObject.GetComponent<T>() ?? gameObject.AddComponent<T>();
 
     #endregion
+
+    #region ObjectExtensions
+
+    /// <summary>
+    /// Performs an action if this reference isn't null or prints error in DebugWrapper if it's null 
+    /// </summary>
+    /// <param name="reference">this object reference</param>
+    /// <param name="action">Action to perform if reference isn't null</param>
+    public static void DoActionWithCheckReference(this System.Object reference, Action action)
+    {
+        if (reference != null)
+        {
+            action.Invoke();
+        }
+        else
+        {
+            DebugWrapper.LogError($"{nameof(reference)} is null! Assign the reference!",
+                DebugColors.Red);
+        }
+    }
+
+    #endregion
 }

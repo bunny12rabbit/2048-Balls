@@ -36,7 +36,22 @@ namespace Managers
                 _maxSpawnedCriteria = criteria;
             }
         }
-        
+
+        public MatchableItemGeneric<uint> SpawnBallLock(Vector3 position)
+        {
+            uint criteria = GameManager.Instance.DataBase.BallData.GetMaxCriteriaAvailable();
+            var ballLock = (MatchableItemGeneric<uint>)_factory.ConstructItem(itemPath, position, criteria);
+            ballLock.CollisionHandler.SwitchPhysics(false);
+
+            int maxAvailableCriteriaIndex = GameManager.Instance.RangeToSpawnCount - 1;
+            var scale = GameManager.Instance.DataBase.BallData.GetData(maxAvailableCriteriaIndex).LocalScale;
+            ballLock.UpdateLocalScale(scale);
+
+            (ballLock as Ball)?.SetLineRendererActive(false);
+
+            return ballLock;
+        }
+
         private void Start()
         {
             InputListener.OnRelease += OnNeedToSpawnNewItem;
@@ -79,7 +94,7 @@ namespace Managers
         {
             uint randomItemCriteria = GetRandomItemCriteria();
             var item = _factory.ConstructItem(itemPath, spawnPoint.position, randomItemCriteria);
-            
+
             InputController.Instance.UpdateTarget((Ball)item);
         }
 
