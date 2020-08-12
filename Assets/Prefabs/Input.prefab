@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6076785464121390195}
   - component: {fileID: 6076785464121390197}
   m_Layer: 0
-  m_Name: __Input__
+  m_Name: Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,5 +57,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8145284171e740ae8546f9bc77d46583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 700
+  sensitivity: 1200
   mainCamera: {fileID: 0}

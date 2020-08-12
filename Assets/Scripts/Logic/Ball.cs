@@ -134,13 +134,16 @@ namespace Logic
         private void OnMoveTweenAnimationComplete()
         {
             UpdateData();
-            AudioManager.Instance.PlayFxSound(AudioFxTypes.Collapse);
 
             bool isWinCondition = IsWinCondition();
 
             if (isWinCondition)
             {
                 GameManager.Instance.WinGame();
+            }
+            else
+            {
+                AudioManager.Instance.PlayFxSound(AudioFxTypes.Collapse);
             }
 
             SpawnVfx();
