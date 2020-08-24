@@ -2,7 +2,7 @@
 
 namespace Generics
 {
-    public class SingletonBehaviourGeneric<T> : MonoBehaviour where T : SingletonBehaviourGeneric<T>
+    public class SingletonBehaviourPersistentGeneric<T> : MonoBehaviour where T : SingletonBehaviourPersistentGeneric<T>
     {
         public static T Instance { get; private set; }
         
@@ -20,6 +20,7 @@ namespace Generics
             }
 
             Instance = (T)this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 }

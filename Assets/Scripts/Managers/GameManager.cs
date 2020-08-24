@@ -25,7 +25,7 @@ namespace Managers
             IsWin = true;
             
             AudioManager.Instance.PlayFxSound(AudioFxTypes.Win);
-            GameFieldManager.OpenGates();
+            GameFieldManager.Instance.OpenGates();
         }
 
         protected override void Awake()

@@ -1,6 +1,6 @@
 ﻿using Generics;
 
-public class CoroutineTicker : SingletonBehaviourGeneric<CoroutineTicker>
+public class CoroutineTicker : SingletonBehaviourPersistentGeneric<CoroutineTicker>
 {
     private void OnDestroy()
     {

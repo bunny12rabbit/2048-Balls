@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class AudioManager : SingletonBehaviourGeneric<AudioManager>
+    public class AudioManager : SingletonBehaviourPersistentGeneric<AudioManager>
     {
         private enum FadeType
         {
