@@ -120,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gatesLeftHinge: {fileID: 2937761468885588718}
   gatesRightHinge: {fileID: 554688528919599318}
+  lockRigidbody: {fileID: 5130076993266196158}
   ballLockSpawnPoint: {fileID: 2656789584837785114}
 --- !u!1 &7457548553415739703
 GameObject:
@@ -455,6 +456,12 @@ Rigidbody2D:
 --- !u!4 &2656789584837785114 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7567494978423281437, guid: bd5be142f341bea44b203f55e276e3f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5610346710519668999}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &5130076993266196158 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 786517242975584185, guid: bd5be142f341bea44b203f55e276e3f2,
     type: 3}
   m_PrefabInstance: {fileID: 5610346710519668999}
   m_PrefabAsset: {fileID: 0}

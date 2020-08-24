@@ -156,11 +156,6 @@ namespace Generics.UI
 
                 yield return null;
             }
-
-            if (!isAnimate)
-            {
-                gameObject.SetActive(IsShown);
-            }
         }
     }
 }

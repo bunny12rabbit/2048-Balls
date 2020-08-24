@@ -36,10 +36,9 @@ namespace Managers
 
         [UsedImplicitly]
         public void ShowPauseWindow() => WindowManager.Instance.ShowWindow(typeof(SettingsWindow));
-
-
+        
+        public void SetPauseButtonActive(bool isActive) => pauseButton.gameObject.SetActive(isActive);
+        
         private void Start() => SetPauseButtonActive(false);
-
-        private void SetPauseButtonActive(bool isActive) => pauseButton.gameObject.SetActive(isActive);
     }
 }

@@ -144,7 +144,7 @@ namespace Logic
         private void SwitchPhysics(bool state) => CollisionHandler.SwitchPhysics(state);
 
         private bool IsWinCondition() =>
-            Data?.Criteria >= GameManager.Instance.DataBase.BallData.GetMaxCriteriaAvailable();
+            Data?.Criteria >= GameManager.Instance.WinCriteria;
 
         private void ResetBallState()
         {

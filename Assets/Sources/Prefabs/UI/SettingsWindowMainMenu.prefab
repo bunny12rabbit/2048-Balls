@@ -205,7 +205,7 @@ PrefabInstance:
     - target: {fileID: 1414312161127442104, guid: 13cab8be434816a49addf7532d4f711f,
         type: 3}
       propertyPath: m_Name
-      value: SettingsWindowGame
+      value: SettingsWindowMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 1414312161127442104, guid: 13cab8be434816a49addf7532d4f711f,
         type: 3}
@@ -306,6 +306,51 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944004945522536295, guid: 13cab8be434816a49addf7532d4f711f,
+        type: 3}
+      propertyPath: isAnimate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944004945522536295, guid: 13cab8be434816a49addf7532d4f711f,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[1].time
+      value: 0.38665462
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944004945522536295, guid: 13cab8be434816a49addf7532d4f711f,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[1].value
+      value: 0.70977944
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944004945522536295, guid: 13cab8be434816a49addf7532d4f711f,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[2].time
+      value: 0.5615401
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944004945522536295, guid: 13cab8be434816a49addf7532d4f711f,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[2].value
+      value: 1.0762013
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944004945522536295, guid: 13cab8be434816a49addf7532d4f711f,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[3].time
+      value: 0.7934805
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944004945522536295, guid: 13cab8be434816a49addf7532d4f711f,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[3].value
+      value: 0.90746766
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944004945522536295, guid: 13cab8be434816a49addf7532d4f711f,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[4].inSlope
+      value: 0.4480562
+      objectReference: {fileID: 0}
+    - target: {fileID: 4944004945522536295, guid: 13cab8be434816a49addf7532d4f711f,
+        type: 3}
+      propertyPath: animationCurve.m_Curve.Array.data[4].outSlope
+      value: 0.4480562
       objectReference: {fileID: 0}
     - target: {fileID: 7225429246721727729, guid: 13cab8be434816a49addf7532d4f711f,
         type: 3}

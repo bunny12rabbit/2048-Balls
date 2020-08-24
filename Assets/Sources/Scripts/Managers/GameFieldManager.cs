@@ -8,6 +8,7 @@ namespace Managers
     {
         [SerializeField] private Rigidbody2D gatesLeftHinge;
         [SerializeField] private Rigidbody2D gatesRightHinge;
+        [SerializeField] private Rigidbody2D lockRigidbody;
 
         [SerializeField] private Transform ballLockSpawnPoint;
 
@@ -29,6 +30,7 @@ namespace Managers
 
             gatesLeftHinge.isKinematic = false;
             gatesRightHinge.isKinematic = false;
+            lockRigidbody.isKinematic = false;
         }
 
         private void Start() => _ballLock = ItemSpawner.Instance.SpawnBallLock(ballLockSpawnPoint.position);

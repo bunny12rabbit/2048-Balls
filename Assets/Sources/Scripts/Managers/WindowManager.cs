@@ -110,7 +110,19 @@ namespace Managers
                 ? inactiveWindowsContainer
                 : _canvas.AddRectTransformChild(INACTIVE_WINDOWS_CONTAINER_NAME).transform;
             
+            CleanWindowsIn(_activeWindowsContainer);
+            CleanWindowsIn(_inactiveWindowsContainer);
+            
             CreateWindows();
+        }
+
+        private static void CleanWindowsIn(Transform parent)
+        {
+            int childCount = parent.childCount;
+            for (var i = 0; i < childCount; i++)
+            {
+                Destroy(parent.GetChild(i).gameObject);
+            }
         }
 
         private void CreateWindows()

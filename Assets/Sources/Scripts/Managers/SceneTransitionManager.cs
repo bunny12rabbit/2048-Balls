@@ -28,7 +28,7 @@ namespace Managers
             _isLoadingAnimationPlaying = true;
             var endPosition = isShow ? Vector3.zero : _loadingScreenFinishPosition;
 
-            Tween.LocalPosition(loadingScreenTransform, endPosition, loadingAnimationDuration, 0, null,
+            Tween.LocalPosition(loadingScreenTransform, endPosition, loadingAnimationDuration * 0.5f, 0, null,
                 Tween.LoopType.None, null, OnLoadingAnimationDone);
         }
         

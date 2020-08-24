@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5223570776615894983}
   - component: {fileID: 5223570776615894982}
   m_Layer: 0
-  m_Name: __GameManager__
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,3 +46,5 @@ MonoBehaviour:
   dataBase:
     ballData: {fileID: 11400000, guid: 38e80d30e251f914b81353dc29cb85a2, type: 2}
   rangeToSpawnCount: 4
+  isCustomWinCriteria: 1
+  winCriteria: 16
