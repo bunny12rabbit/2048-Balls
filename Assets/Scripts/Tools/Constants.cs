@@ -21,24 +21,11 @@ public static class Constants
 
         public static string GetTag(Tags tag) => _tags[tag];
     }
-    
-    public struct SceneNames
+
+    public enum SceneIndexes
     {
-        public enum Scene
-        {
-            Menu, Game
-        }
-
-        public const string MENU = "Menu";
-        public const string GAME = "Game";
-        
-        private static readonly Dictionary<Scene, string> _scenes = new Dictionary<Scene, string>
-        {
-            {Scene.Menu, MENU},
-            {Scene.Game, GAME}
-        };
-
-        public static string GetSceneName(Scene scene) => _scenes[scene];
-
+        AppStart,
+        MainMenu,
+        Game
     }
 }

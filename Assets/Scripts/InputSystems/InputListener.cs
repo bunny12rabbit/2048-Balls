@@ -1,5 +1,6 @@
 ﻿using System;
 using Generics;
+using StaticTools;
 using UnityEngine;
 
 namespace InputSystems
@@ -21,6 +22,11 @@ namespace InputSystems
 
         private void Update()
         {
+            if (StaticUtilities.IsPointerOverUIObject())
+            {
+                return;
+            }
+
             var inputPosition = Input.mousePosition;
 
             if (IsPressed)

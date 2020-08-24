@@ -14,8 +14,8 @@ public static class Yielders
     private static Dictionary<float, WaitForSeconds> _timeIntervals =
         new Dictionary<float, WaitForSeconds>(100, new FloatComparer());
     
-    private static WaitForEndOfFrame _endOfFrame = new WaitForEndOfFrame();
-    private static WaitForFixedUpdate _fixedUpdate = new WaitForFixedUpdate();
+    private static readonly WaitForEndOfFrame _endOfFrame = new WaitForEndOfFrame();
+    private static readonly WaitForFixedUpdate _fixedUpdate = new WaitForFixedUpdate();
 
     public static WaitForEndOfFrame EndOfFrame => _endOfFrame;
     public static WaitForFixedUpdate FixedUpdate => _fixedUpdate;

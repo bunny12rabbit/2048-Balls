@@ -4,9 +4,10 @@ using Factories;
 using Generics;
 using InputSystems;
 using Logic;
+using Managers;
 using UnityEngine;
 
-namespace Managers
+namespace Controllers
 {
     public class ItemSpawner : SingletonBehaviourGeneric<ItemSpawner>
     {
@@ -23,6 +24,8 @@ namespace Managers
         private List<uint> _criteriaRangeToSpawn = new List<uint>();
 
         private bool _isSpawnRunning;
+        private bool _isFirstSpawn = true;
+        
         private uint _maxSpawnedCriteria;
 
 
@@ -58,6 +61,8 @@ namespace Managers
 
             _criteriaRangeToSpawn = GameManager.Instance.GetCriteriaRangeToSpawn();
             SpawnNewItem();
+
+            _isFirstSpawn = false;
         }
 
         private void OnNeedToSpawnNewItem()
@@ -100,8 +105,13 @@ namespace Managers
 
         private uint GetRandomItemCriteria()
         {
-            int maxIndex = _criteriaRangeToSpawn.IndexOf(_maxSpawnedCriteria) + 1;
+            int maxIndex = _isFirstSpawn ? 1 : _criteriaRangeToSpawn.IndexOf(_maxSpawnedCriteria) + 1;
             return _criteriaRangeToSpawn[Random.Range(0, maxIndex)];
+        }
+
+        private void OnDestroy()
+        {
+            InputListener.OnRelease -= OnNeedToSpawnNewItem;
         }
     }
 }

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace StaticTools
 {
@@ -60,6 +63,36 @@ namespace StaticTools
             }
 
             return new Color(red, green, blue, color.a);
+        }
+
+        /// <summary>
+        /// Cast a ray to test if Input.mousePosition is over any UI object in EventSystem.current. This is a replacement
+        /// for IsPointerOverGameObject() which does not work on Android
+        /// </summary>
+        public static bool IsPointerOverUIObject()
+        {
+            var eventDataCurrentPosition = new PointerEventData(EventSystem.current)
+            {
+                position = new Vector2(Input.mousePosition.x, Input.mousePosition.y)
+            };
+
+            var results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            return results.Count > 0;
+        }
+
+        /// <summary>
+        /// Cast a ray to test if screenPosition is over any UI object in canvas. This is a replacement
+        /// for IsPointerOverGameObject() which does not work on Android
+        /// </summary>
+        public static bool IsPointerOverUIObject(Canvas canvas, Vector2 screenPosition)
+        {
+            var eventDataCurrentPosition = new PointerEventData(EventSystem.current) {position = screenPosition};
+
+            var uiRaycaster = canvas.gameObject.GetComponent<GraphicRaycaster>();
+            var results = new List<RaycastResult>();
+            uiRaycaster.Raycast(eventDataCurrentPosition, results);
+            return results.Count > 0;
         }
     }
 }

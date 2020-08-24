@@ -23,6 +23,7 @@ namespace Generics
         
         public new Transform transform { get; private set; }
 
+        //TODO: Remove from here
         public abstract CollisionHandlerGeneric<T> CollisionHandler { get; protected set; }
 
         public virtual IMatchableData<T> Data { get; protected set; }
@@ -74,7 +75,8 @@ namespace Generics
         public abstract void OnMatch(IMatchableItem<T> matchedObject);
         public abstract void UpdateData(T criteria = default);
 
-        
+        public void UpdateLocalScale(Vector2 scale) => _spriteRendererTransform.localScale = scale;
+
         private GameObject SpawnVfx(string vfxPath) =>
             GameObjectPool.GetObjectFromPool(vfxPath, transform.position, Quaternion.identity);
         
@@ -105,10 +107,5 @@ namespace Generics
         }
 
         #endregion
-
-        public void UpdateLocalScale(Vector2 scale)
-        {
-            _spriteRendererTransform.localScale = scale;
-        }
     }
 }

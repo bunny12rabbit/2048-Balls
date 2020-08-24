@@ -15,6 +15,7 @@ namespace Generics
         [SerializeField] private LayerMask layerMask;
 
 
+        // TODO : need to use Observer
         private MatchableItemGeneric<T> _matchable;
 
         public void Initialize(MatchableItemGeneric<T> matchable)
@@ -31,10 +32,11 @@ namespace Generics
 
         public void SwitchPhysicsSimulation(bool state) => myRigidbody.gravityScale = !state ? 0 : gravityScale;
 
+        // TODO : Rework to Ball mockUp (Fake Ball)
         public void MoveToPosition(Vector3 initialRigidbodyPosition, Vector3 newPositionOffset)
         {
-            var position = myRigidbody.transform.position;
-            myRigidbody.velocity = new Vector2(initialRigidbodyPosition.x + newPositionOffset.x - position.x, 0) *
+            var lastPosition = myRigidbody.transform.position;
+            myRigidbody.velocity = new Vector2(initialRigidbodyPosition.x + newPositionOffset.x - lastPosition.x, 0) *
                                    (InputController.Sensitivity * Time.fixedDeltaTime);
         }
 

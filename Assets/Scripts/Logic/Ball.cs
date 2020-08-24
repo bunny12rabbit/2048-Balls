@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using Controllers;
+using Data;
 using Generics;
 using InputSystems;
 using Managers;
@@ -97,26 +98,27 @@ namespace Logic
                 var position = transform.position;
                 var matchedBallPosition = matchedBall.transform.position;
 
+                bool isCorrectPosition = Mathf.Abs(position.y - matchedBallPosition.y) > HEIGHT_DIFFERENCE &&
+                         position.y - matchedBallPosition.y < HEIGHT_DIFFERENCE;
+
+                bool isSameBall = ReferenceEquals(matchedBall, _matchedBall);
+                
                 return GameManager.Instance.IsWin || matchedBall.Data.IsMatched ||
-                       _matchedBall != null && !ReferenceEquals(matchedBall, _matchedBall) ||
-                       Mathf.Abs(position.y - matchedBallPosition.y) > HEIGHT_DIFFERENCE &&
-                       position.y - matchedBallPosition.y < HEIGHT_DIFFERENCE;
+                       _matchedBall != null && !isSameBall || isCorrectPosition;
             }
         }
 
         private void MoveTowardsOther(IMatchableItem<uint> matchedBall)
         {
             Tween.Position(transform, matchedBall.transform.position, moveTowardsDuration, 0, Tween.EaseInOutStrong,
-                Tween.LoopType.None, null, OnMoveTweenAnimationComplete);
+                Tween.LoopType.None, null, OnMoveAnimationComplete);
         }
 
-        private void OnMoveTweenAnimationComplete()
+        private void OnMoveAnimationComplete()
         {
             UpdateData();
 
-            bool isWinCondition = IsWinCondition();
-
-            if (isWinCondition)
+            if (IsWinCondition())
             {
                 GameManager.Instance.WinGame();
             }
