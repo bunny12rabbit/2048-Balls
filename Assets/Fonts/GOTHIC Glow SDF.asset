@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: GOTHIC SDF Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: GLOW_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: GOTHIC SDF
+  m_Name: GOTHIC Glow SDF
   m_EditorClassIdentifier: 
-  hashCode: 1766211119
+  hashCode: 1493612220
   material: {fileID: -5963328987595430331}
   materialHashCode: 990987972
   m_Version: 1.1.0
