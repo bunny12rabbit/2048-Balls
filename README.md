@@ -4,8 +4,9 @@ Used:
 - Unity 2019.4.5.f1;
 - UnityUI system;
 - GitHub repository;
-- Surge TweenEngine (http://surge.pixelplacement.com/tween.html)
-- 2D Dev Sprites from AssetStore to fasten prototyping.
+- Surge TweenEngine (http://surge.pixelplacement.com/tween.html);
+- 2D Dev Sprites from AssetStore to fasten prototyping;
+- Debug Console from AssetStore to ease debuging on mobiles (Tap with 3 fingers).
 
 Target archicture: Android.
 
@@ -23,3 +24,15 @@ Some of the used technics:
 - Interfaces and Generics to ease project scale;
 - GameObjectPool;
 - ScriptableObjects to easly configure game data;
+
+<details>
+<summary>Screenshots:</summary>
+<p align="center">
+  <img src="https://i.ibb.co/BtcknsC/Screenshot-20200825-130322.jpg" width="350">
+  <img src="https://i.ibb.co/JFTjF4f/Screenshot-20200825-130329.jpg" width="350">
+  <img src="https://i.ibb.co/f8dZt48/Screenshot-20200825-130334.jpg" width="350">
+  <img src="https://i.ibb.co/9vL7Zcc/Screenshot-20200825-133446.jpg" width="350">
+  <img src="https://i.ibb.co/LP0x9Mb/Screenshot-20200825-133500.jpg" width="350">
+  <img src="https://i.ibb.co/98chXTd/Screenshot-20200825-130355.jpg" width="350">
+</p>
+</details>
