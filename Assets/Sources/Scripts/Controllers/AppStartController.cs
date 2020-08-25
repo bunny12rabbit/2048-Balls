@@ -37,7 +37,7 @@ namespace Controllers
         private IEnumerator StartLogoAnimation()
         {
             _textCanvasGroup.alpha = 0;
-            var textTargetColor = targetColor == Color.white ? Color.black : Color.white;
+            var textTargetColor = Color.black;
             float duration = logoDuration * 0.5f;
             
             yield return CoroutineTicker.Instance.StartCoroutine(Fade(1));

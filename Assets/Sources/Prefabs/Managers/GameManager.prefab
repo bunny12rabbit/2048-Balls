@@ -46,5 +46,5 @@ MonoBehaviour:
   dataBase:
     ballData: {fileID: 11400000, guid: 38e80d30e251f914b81353dc29cb85a2, type: 2}
   rangeToSpawnCount: 4
-  isCustomWinCriteria: 1
-  winCriteria: 16
+  isCustomWinCriteria: 0
+  winCriteria: 256

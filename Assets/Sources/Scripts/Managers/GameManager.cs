@@ -47,13 +47,16 @@ namespace Managers
 
         private void OnValidate()
         {
-            if (isCustomWinCriteria)
+            uint minCriteria = DataBase.BallData.GetData(1).Criteria;
+            uint maxCriteriaAvailable = DataBase.BallData.GetMaxCriteriaAvailable();
+            
+            if (!isCustomWinCriteria)
             {
+                winCriteria = maxCriteriaAvailable;
                 return;
             }
 
-            winCriteria = (uint)Mathf.Clamp(winCriteria, DataBase.BallData.GetData(1).Criteria,
-                DataBase.BallData.GetMaxCriteriaAvailable());
+            winCriteria = (uint)Mathf.Clamp(winCriteria, minCriteria, maxCriteriaAvailable);
         }
     }
 }

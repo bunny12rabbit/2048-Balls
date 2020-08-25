@@ -1628,8 +1628,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  musicSlider: {fileID: 3803614853714645401}
-  effectsSlider: {fileID: 455257122900887747}
 --- !u!1 &5908312535648058627
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,16 +1835,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: VICTORY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a11165c35cfd05142aca5ce483acac11, type: 2}
-  m_sharedMaterial: {fileID: -5963328987595430331, guid: a11165c35cfd05142aca5ce483acac11,
+  m_fontAsset: {fileID: 11400000, guid: 9fcde35dc0de9b1449d9e65ea862fc98, type: 2}
+  m_sharedMaterial: {fileID: -5963328987595430331, guid: 9fcde35dc0de9b1449d9e65ea862fc98,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283517806
-  m_fontColor: {r: 0.43137255, g: 0.29411766, b: 0.31764707, a: 1}
+    rgba: 4293127408
+  m_fontColor: {r: 0.9411765, g: 0.9254902, b: 0.8901961, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
