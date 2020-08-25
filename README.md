@@ -26,13 +26,20 @@ Some of the used technics:
 - ScriptableObjects to easly configure game data;
 
 <details>
-<summary>Screenshots:</summary>
-<p align="center">
-  <img src="https://i.ibb.co/BtcknsC/Screenshot-20200825-130322.jpg" width="350">
-  <img src="https://i.ibb.co/JFTjF4f/Screenshot-20200825-130329.jpg" width="350">
-  <img src="https://i.ibb.co/f8dZt48/Screenshot-20200825-130334.jpg" width="350">
-  <img src="https://i.ibb.co/9vL7Zcc/Screenshot-20200825-133446.jpg" width="350">
-  <img src="https://i.ibb.co/LP0x9Mb/Screenshot-20200825-133500.jpg" width="350">
-  <img src="https://i.ibb.co/98chXTd/Screenshot-20200825-130355.jpg" width="350">
-</p>
+  <summary>Screenshots:</summary>
+    <p align="center">
+      <img src="https://i.ibb.co/BtcknsC/Screenshot-20200825-130322.jpg" width="350">
+      <img src="https://i.ibb.co/JFTjF4f/Screenshot-20200825-130329.jpg" width="350">
+      <img src="https://i.ibb.co/f8dZt48/Screenshot-20200825-130334.jpg" width="350">
+      <img src="https://i.ibb.co/9vL7Zcc/Screenshot-20200825-133446.jpg" width="350">
+      <img src="https://i.ibb.co/LP0x9Mb/Screenshot-20200825-133500.jpg" width="350">
+      <img src="https://i.ibb.co/98chXTd/Screenshot-20200825-130355.jpg" width="350">
+    </p>
+</details>
+
+<details>
+  <summary>Video:</summary>
+    <div align="center">
+      <a href="https://www.youtube.com/watch?v=9YVaEyz1bAE"><img src="https://i.ibb.co/1KWM52B/image.png" alt="Click to play on YouTube"></a>
+    </div>
 </details>
