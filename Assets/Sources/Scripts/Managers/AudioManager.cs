@@ -1,7 +1,10 @@
 ﻿using System.Collections;
+using Controllers;
 using Data;
 using Generics;
+using StaticTools;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Managers
 {
@@ -15,8 +18,13 @@ namespace Managers
 
         [SerializeField] private AudioData audioData;
 
+        [SerializeField] private AudioMixer mixer;
+        
         [SerializeField] private AudioSource musicAudioSource;
         [SerializeField] private AudioSource fxAudioSource;
+
+        [SerializeField] private string musicVolumeParameter;
+        [SerializeField] private string fxVolumeParameter;
 
         [Space] [SerializeField] private float fadeDuration = 5f;
 
@@ -30,6 +38,8 @@ namespace Managers
             fxAudioSource.pitch = sound.pitch;
             fxAudioSource.Play();
         }
+
+        public void SetVolume(string volumeParameter, float value) => mixer.SetFloat(volumeParameter, value);
 
         protected override void Awake()
         {
@@ -53,7 +63,26 @@ namespace Managers
 
         private void Start()
         {
+            UpdateVolume();
             StartMusic();
+        }
+
+        private void UpdateVolume()
+        {
+            float musicSliderValue = GetDataFromPrefs(musicVolumeParameter);
+            float fxSliderValue = GetDataFromPrefs(fxVolumeParameter);
+            
+            float musicVolume = StaticUtilities.GetLogValueForMixer(musicSliderValue);
+            float fxVolume = StaticUtilities.GetLogValueForMixer(fxSliderValue);
+
+            mixer.SetFloat(musicVolumeParameter, musicVolume);
+            mixer.SetFloat(fxVolumeParameter, fxVolume);
+        }
+
+        private float GetDataFromPrefs(string volumeParameter)
+        {
+            float defaultVolume = mixer.GetFloat(volumeParameter, out defaultVolume) ? defaultVolume : 0.5f;
+            return  PlayerPrefs.GetFloat(volumeParameter, defaultVolume);
         }
 
         private void StartMusic()

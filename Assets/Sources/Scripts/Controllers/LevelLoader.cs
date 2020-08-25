@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Generics;
 using Managers;
 using UnityEngine;
@@ -8,6 +9,9 @@ namespace Controllers
 {
     public class LevelLoader : SingletonBehaviourPersistentGeneric<LevelLoader>
     {
+        public static Action<Constants.SceneIndexes> onSceneLoaded;
+        
+        
         private static AsyncOperation _asyncOperation;
 
 
@@ -34,10 +38,10 @@ namespace Controllers
             switch (scene.buildIndex)
             {
                 case (int)Constants.SceneIndexes.MainMenu:
-                    UiManager.Instance.ShowMainMenuUi();
+                    onSceneLoaded?.Invoke(Constants.SceneIndexes.MainMenu);
                     break;
                 case (int)Constants.SceneIndexes.Game:
-                    UiManager.Instance.ShowGameUi();
+                    onSceneLoaded?.Invoke(Constants.SceneIndexes.Game);
                     break;
             }
         }

@@ -302,6 +302,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioData: {fileID: 11400000, guid: 2874f76f593d3564fa432d80901b75d1, type: 2}
+  mixer: {fileID: 24100000, guid: f80b943e8f31c0f44a7d0076d979d2bd, type: 2}
   musicAudioSource: {fileID: 4233403584492716983}
   fxAudioSource: {fileID: 4309385515474159621}
+  musicVolumeParameter: MusicVolume
+  fxVolumeParameter: FXVolume
   fadeDuration: 5

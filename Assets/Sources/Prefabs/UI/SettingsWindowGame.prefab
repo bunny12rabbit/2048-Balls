@@ -502,8 +502,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  musicSlider: {fileID: 1414312161487227781}
-  effectsSlider: {fileID: 2767805109042349342}
+  musicSlider: {fileID: 2023508950505932281}
+  fxSlider: {fileID: 3016690284075928418}
 --- !u!1 &1414312161722580333
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,18 +1192,23 @@ PrefabInstance:
       propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6644614858485287439, guid: b027859ec865d634da781704d84e1fec,
+        type: 3}
+      propertyPath: volumeParameter
+      value: MusicVolume
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b027859ec865d634da781704d84e1fec, type: 3}
---- !u!114 &1414312161487227781 stripped
+--- !u!114 &2023508950505932281 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6017439963421901939, guid: b027859ec865d634da781704d84e1fec,
+  m_CorrespondingSourceObject: {fileID: 6644614858485287439, guid: b027859ec865d634da781704d84e1fec,
     type: 3}
   m_PrefabInstance: {fileID: 4621424020191350774}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Script: {fileID: 11500000, guid: b794d89116b347108c3434c3bd5d0702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &1414312161487227782 stripped
@@ -1484,6 +1489,11 @@ PrefabInstance:
       propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6644614858485287439, guid: b027859ec865d634da781704d84e1fec,
+        type: 3}
+      propertyPath: volumeParameter
+      value: FXVolume
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b027859ec865d634da781704d84e1fec, type: 3}
 --- !u!224 &2767805109042349341 stripped
@@ -1492,15 +1502,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8496891542386737517}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2767805109042349342 stripped
+--- !u!114 &3016690284075928418 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6017439963421901939, guid: b027859ec865d634da781704d84e1fec,
+  m_CorrespondingSourceObject: {fileID: 6644614858485287439, guid: b027859ec865d634da781704d84e1fec,
     type: 3}
   m_PrefabInstance: {fileID: 8496891542386737517}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Script: {fileID: 11500000, guid: b794d89116b347108c3434c3bd5d0702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -94,5 +94,12 @@ namespace StaticTools
             uiRaycaster.Raycast(eventDataCurrentPosition, results);
             return results.Count > 0;
         }
+        
+        /// <summary>
+        /// Converts slider value to logarithmic mixer value
+        /// </summary>
+        /// <param name="value">value between 0.0001 and 1</param>
+        /// <returns>Log from value</returns>
+        public static float GetLogValueForMixer(float value) => Mathf.Log10(value) * 20;
     }
 }
