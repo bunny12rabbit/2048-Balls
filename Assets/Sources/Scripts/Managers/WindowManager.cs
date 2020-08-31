@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Generics;
 using Generics.UI;
-using UI;
 using UnityEngine;
 
 namespace Managers
@@ -97,11 +96,21 @@ namespace Managers
 
         private void Initialize()
         {
-            _canvas = UiManager.Instance ? UiManager.Instance.Canvas : FindObjectOfType<Canvas>().gameObject;
-
-            var activeWindowsContainer = UiManager.Instance.ActiveWindowsContainer;
-            var inactiveWindowsContainer = UiManager.Instance.InactiveWindowsContainer;
-
+            Transform activeWindowsContainer = null;
+            Transform inactiveWindowsContainer = null;
+            
+            if (UiManager.Instance)
+            {
+                _canvas = UiManager.Instance.Canvas;
+                activeWindowsContainer = UiManager.Instance.ActiveWindowsContainer;
+                inactiveWindowsContainer = UiManager.Instance.InactiveWindowsContainer;
+                
+            }
+            else
+            {
+                _canvas = FindObjectOfType<Canvas>().gameObject;
+            }
+            
             _activeWindowsContainer = activeWindowsContainer != null
                 ? activeWindowsContainer
                 : _canvas.AddRectTransformChild(ACTIVE_WINDOWS_CONTAINER_NAME).transform;

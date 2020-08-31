@@ -31,7 +31,7 @@ namespace Controllers
             _textCanvasGroup = text.gameObject.GetOrAddComponent<CanvasGroup>();
             _fadeDuration = logoDuration * 0.25f;
             
-            CoroutineTicker.Instance.StartCoroutine(StartLogoAnimation());
+            this.TryStartCoroutineOnTicker(StartLogoAnimation());
         }
 
         private IEnumerator StartLogoAnimation()
@@ -40,7 +40,7 @@ namespace Controllers
             var textTargetColor = Color.black;
             float duration = logoDuration * 0.5f;
             
-            yield return CoroutineTicker.Instance.StartCoroutine(Fade(1));
+            yield return this.TryStartCoroutineOnTicker(Fade(1));
 
             Tween.Value(text.color, textTargetColor, color => text.color = color, duration, 0);
             ChangeColorOverTime(targetColor);

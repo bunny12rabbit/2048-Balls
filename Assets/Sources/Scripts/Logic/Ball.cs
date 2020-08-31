@@ -98,13 +98,13 @@ namespace Logic
                 var position = transform.position;
                 var matchedBallPosition = matchedBall.transform.position;
 
-                bool isCorrectPosition = Mathf.Abs(position.y - matchedBallPosition.y) > HEIGHT_DIFFERENCE &&
+                bool isIncorrectPosition = Mathf.Abs(position.y - matchedBallPosition.y) > HEIGHT_DIFFERENCE &&
                          position.y - matchedBallPosition.y < HEIGHT_DIFFERENCE;
 
                 bool isSameBall = ReferenceEquals(matchedBall, _matchedBall);
                 
                 return GameManager.Instance.IsWin || matchedBall.Data.IsMatched ||
-                       _matchedBall != null && !isSameBall || isCorrectPosition;
+                       _matchedBall != null && !isSameBall || isIncorrectPosition;
             }
         }
 

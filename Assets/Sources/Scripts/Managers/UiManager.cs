@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Controllers;
 using Generics;
-using Generics.UI;
 using JetBrains.Annotations;
 using UI;
 using UnityEngine;

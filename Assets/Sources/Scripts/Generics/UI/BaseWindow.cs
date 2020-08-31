@@ -129,7 +129,7 @@ namespace Generics.UI
                 callBack = () => gameObject.SetActive(false);
             }
 
-            this.TryStartCoroutineOnTicker(SmoothlyChangeAlpha(IsShown));
+            StartCoroutine(SmoothlyChangeAlpha(IsShown, callBack));
 
             if (isAnimate)
             {
@@ -138,7 +138,7 @@ namespace Generics.UI
             }
         }
 
-        private IEnumerator SmoothlyChangeAlpha(bool isShow)
+        private IEnumerator SmoothlyChangeAlpha(bool isShow, Action callback = null)
         {
             if (!panel)
             {
@@ -156,6 +156,8 @@ namespace Generics.UI
 
                 yield return null;
             }
+            
+            callback?.Invoke();
         }
     }
 }

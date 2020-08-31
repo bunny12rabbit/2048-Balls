@@ -16,7 +16,7 @@ namespace Controllers
 
 
         public void LoadLevel(Constants.SceneIndexes scene) =>
-            CoroutineTicker.Instance.StartCoroutine(LoadSceneAsynchronously((int)scene));
+            this.TryStartCoroutineOnTicker(LoadSceneAsynchronously((int)scene));
 
         private void Start()
         {
