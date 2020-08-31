@@ -43,3 +43,7 @@ Some of the used technics:
       <a href="https://www.youtube.com/watch?v=9YVaEyz1bAE"><img src="https://i.ibb.co/1KWM52B/image.png" alt="Click to play on YouTube"></a>
     </div>
 </details>
+
+<div align="left">
+  <a href="https://github.com/bunny12rabbit/2048-Balls/releases/tag/v0.1"> Download Release v0.1</a>
+</div>
