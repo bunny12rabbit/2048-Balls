@@ -419,7 +419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeTimer: 0
   windowContent: {fileID: 6252034984534527895}
-  isCanHideWindow: 1
+  isCanHideWindow: 0
   closeButton: {fileID: 0}
   isAnimate: 0
   animationDuration: 0.45
