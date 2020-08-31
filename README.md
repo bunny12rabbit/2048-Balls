@@ -16,7 +16,7 @@ The game starts from AppStart scene. To add more comfort using Editor, i've crea
 - Scene View (opens up the window with list of scenes, included into BuildSettings, to comfortable move between scenes).
 
 Some of the used technics:
-- CoroutineTicke (Persistent singleton to run coroutines on, in order to it keep running if source gameObject got disabled);
+- CoroutineTicker (Persistent singleton to run coroutines on, in order to it keep running if source gameObject got disabled);
 - DebugWrapper (Shows logs only with FULL_LOG define and allows to use colored text with predefined colors)
 - Yielders (Static readonly Dictionary with time intervals, fixedUpdate, endOfFrame to use instead of every time calling new [YieldInstruction], drastically decrease GC allocations)
 - Some StaticUtilities (Like ChangeColorBrightness, IsPointerOverUIObject, e.t.c);
