@@ -1,7 +1,7 @@
 # 2048-Balls
 The pet-project for showcase, due to all working projects is under NDA.
 Used:
-- Unity 2019.4.5.f1;
+- Unity 2020.1.17f1;
 - UnityUI system;
 - GitHub repository;
 - Surge TweenEngine (http://surge.pixelplacement.com/tween.html);
