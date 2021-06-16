@@ -753,9 +753,7 @@ namespace Pixelplacement
             for (int i = 0; i < activeTweens.Count; i++)
             {
                 if (activeTweens[i].targetInstanceID == targetInstanceID && activeTweens[i].tweenType == tweenType && activeTweens[i].Status != TweenStatus.Delayed)
-                {
                     activeTweens[i].Stop();
-                }
             }
         }
 
@@ -773,9 +771,7 @@ namespace Pixelplacement
         public static void StopAll()
         {
             foreach (TweenSystem.TweenBase item in activeTweens)
-            {
                 item.Stop();
-            }
         }
 
         /// <summary>
@@ -784,9 +780,7 @@ namespace Pixelplacement
         public static void FinishAll()
         {
             foreach (TweenSystem.TweenBase item in activeTweens)
-            {
                 item.Finish();
-            }
         }
 
         /// <summary>
@@ -811,9 +805,7 @@ namespace Pixelplacement
         public static void CancelAll()
         {
             foreach (TweenSystem.TweenBase item in activeTweens)
-            {
                 item.Cancel();
-            }
         }
 
         //Public Properties - Ease Curves:
@@ -975,9 +967,7 @@ namespace Pixelplacement
             for (int i = 0; i < activeTweens.Count; i++)
             {
                 if (activeTweens[i].targetInstanceID == id)
-                {
                     activeTweens[i].Stop();
-                }
             }
         }
 
@@ -986,9 +976,7 @@ namespace Pixelplacement
             for (int i = 0; i < activeTweens.Count; i++)
             {
                 if (activeTweens[i].targetInstanceID == id && activeTweens[i].tweenType == type)
-                {
                     activeTweens[i].Stop();
-                }
             }
         }
 
@@ -997,9 +985,7 @@ namespace Pixelplacement
             for (int i = 0; i < activeTweens.Count; i++)
             {
                 if (activeTweens[i].targetInstanceID == id)
-                {
                     activeTweens[i].Finish();
-                }
             }
         }
 
@@ -1008,24 +994,18 @@ namespace Pixelplacement
             for (int i = 0; i < activeTweens.Count; i++)
             {
                 if (activeTweens[i].targetInstanceID == id)
-                {
                     activeTweens[i].Cancel();
-                }
             }
         }
 
         static void SendTweenForProcessing(TweenSystem.TweenBase tween, bool interrupt = false)
         {
             if (!Application.isPlaying) 
-            {
-                //Tween can not be called in edit mode!
+            //Tween can not be called in edit mode!
                 return;
-            }
 
             if (interrupt && tween.Delay == 0)
-            {
                 StopInstanceTargetType(tween.targetInstanceID, tween.tweenType);
-            }
 
             Instance.ExecuteTween(tween);
         }

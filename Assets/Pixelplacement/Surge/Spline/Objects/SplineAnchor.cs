@@ -100,9 +100,7 @@ namespace Pixelplacement
 
             //initialization:
             if (!_initialized)
-            {
                 Initialize ();
-            }
 
             //override any skinned mesh bounds changes:
             Anchor.localPosition = Vector3.zero;
@@ -194,45 +192,31 @@ namespace Pixelplacement
             foreach (var item in GetComponentsInChildren<Renderer>())
             {
                 if (Application.isEditor)
-                {
                     item.sharedMaterial.hideFlags = HideFlags.HideInInspector;
-                }
                 else
-                {
                     Destroy(item);
-                }
             }
 
             foreach (var item in GetComponentsInChildren<MeshFilter>())
             {
                 if (Application.isEditor)
-                {
                     item.hideFlags = HideFlags.HideInInspector;
-                }
                 else
-                {
                     Destroy(item);
-                }
             }
 
             foreach (var item in GetComponentsInChildren<MeshRenderer>())
             {
                 if (Application.isEditor)
-                {
                     item.hideFlags = HideFlags.HideInInspector;
-                }
                 else
-                {
                     Destroy(item);
-                }
             }
 
             foreach (var item in GetComponentsInChildren<SkinnedMeshRenderer>())
             {
                 if (Application.isEditor)
-                {
                     item.hideFlags = HideFlags.HideInInspector;
-                }
             }
 
             //synchronize status variables:

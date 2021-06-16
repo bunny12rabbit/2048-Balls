@@ -57,9 +57,7 @@ namespace Pixelplacement
                 }
 
                 if (_stateMachine.currentState != _stateMachine.defaultState)
-                {
                     _stateMachine.ChangeState(_stateMachine.defaultState);
-                }
             }
         }
 

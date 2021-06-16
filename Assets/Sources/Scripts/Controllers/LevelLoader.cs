@@ -23,10 +23,8 @@ namespace Controllers
             SceneTransitionManager.Instance.onLoadingAnimationDone += () =>
             {
                 if (_asyncOperation == null)
-                {
                     return;
-                }
-                
+
                 _asyncOperation.allowSceneActivation = true;
             };
 

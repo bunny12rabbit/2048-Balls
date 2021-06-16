@@ -31,9 +31,7 @@ namespace Managers
             _mainModules = new ParticleSystem.MainModule[targets.Count];
 
             for (var index = 0; index < targets.Count; index++)
-            {
                 _mainModules[index] = targets[index].main;
-            }
         }
 
         public void ChangeColor(Color color)

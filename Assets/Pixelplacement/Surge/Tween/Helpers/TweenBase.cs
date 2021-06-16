@@ -105,10 +105,8 @@ namespace Pixelplacement.TweenSystem
         public bool Tick ()
         {
             //stop where we are:
-            if (Status == Tween.TweenStatus.Stopped) 
-            {
+            if (Status == Tween.TweenStatus.Stopped)
                 return false;
-            }
 
             //rewind operation and stop:
             if (Status == Tween.TweenStatus.Canceled)
@@ -129,12 +127,10 @@ namespace Pixelplacement.TweenSystem
 
             float progress = 0.0f;
             //calculate:
-            if (ObeyTimescale) 
-            {
+            if (ObeyTimescale)
                 elapsedTime += Time.deltaTime;
-            }else{
+            else
                 elapsedTime += Time.unscaledDeltaTime;
-            }
             progress = Math.Max(elapsedTime, 0f);
 
             //percentage:
@@ -163,15 +159,13 @@ namespace Pixelplacement.TweenSystem
             if (Curve != null && CurveKeys.Length > 0) curveValue = TweenUtilities.EvaluateCurve (Curve, percentage);
         
             //perform operation with minimal overhead of a try/catch to account for anything that has been destroyed while tweening:
-            if (Status == Tween.TweenStatus.Running) 
-            {
+            if (Status == Tween.TweenStatus.Running)
                 try {
                     Operation (curveValue);
                     Percentage = curveValue;
                 } catch (Exception ex) {
                     return false;
                 }
-            }
 
             //tween complete:
             if (percentage == 1) 

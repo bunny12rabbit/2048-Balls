@@ -84,9 +84,7 @@ namespace Pixelplacement
         private void OnEnable()
         {
             if (source == null)
-            {
                 source = transform;
-            }
 
             if (cursor != null)
             {
@@ -138,13 +136,12 @@ namespace Pixelplacement
 
                 case Method.RaycastAll:
                     if (_current.Count > 0)
-                    {
                         foreach (var item in _current)
                         {
                             item.SendMessage("Pressed", SendMessageOptions.DontRequireReceiver);
                             if (OnPressed != null) OnPressed.Invoke(item.gameObject);
                         }
-                    }
+
                     break;
             }
         }
@@ -163,13 +160,12 @@ namespace Pixelplacement
 
                 case Method.RaycastAll:
                     if (_current.Count > 0)
-                    {
                         foreach (var item in _current)
                         {
                             item.SendMessage("Released", SendMessageOptions.DontRequireReceiver);
                             if (OnReleased != null) OnReleased.Invoke(item.gameObject);
                         }
-                    }
+
                     break;
             }
         }
@@ -192,20 +188,14 @@ namespace Pixelplacement
 
             //process input:
             if (pressedInput != null)
-            {
                 foreach (var item in pressedInput)
                 {
                     if (Input.GetKeyDown(item))
-                    {
                         Pressed();
-                    }
 
                     if (Input.GetKeyUp(item))
-                    {
                         Released();
-                    }
                 }
-            }
 
             //clear out:
             _current.Clear();
@@ -229,13 +219,9 @@ namespace Pixelplacement
             if (_debugView)
             {
                 if (hit.transform != null)
-                {
                     Debug.DrawLine(source.position, hit.point, Color.green);
-                }
                 else
-                {
                     Debug.DrawRay(source.position, castDirection * raycastDistance, Color.red);
-                }
             }
 
             //cursor visibility:
@@ -272,34 +258,22 @@ namespace Pixelplacement
                     float posSpeed = unstableSpeed;
                     float delta = Vector3.Distance(_targetPosition, cursor.position);
                     if (delta <= stabilityDelta)
-                    {
                         posSpeed = stableSpeed;
-                    }
 
                     if (delta >= snapDelta)
-                    {
                         cursor.position = _targetPosition;
-                    }
                     else
-                    {
                         cursor.position = Vector3.Lerp(cursor.position, _targetPosition, Time.unscaledDeltaTime * posSpeed);
-                    }
 
                     //set rotation:
                     if (matchSurfaceNormal)
-                    {
                         cursor.rotation = Quaternion.LookRotation(hit.normal, source.up);
-                    }
                     else
-                    {
                         cursor.LookAt(source, Vector3.up);
-                    }
 
                     //adjust:
                     if (flipForward)
-                    {
                         cursor.Rotate(Vector3.up * 180);
-                    }
                 }
                 else
                 {
@@ -309,24 +283,16 @@ namespace Pixelplacement
                     float posSpeed = unstableSpeed;
 
                     if (delta <= stabilityDelta)
-                    {
                         posSpeed = stableSpeed;
-                    }
 
                     if (delta >= snapDelta)
-                    {
                         cursor.position = inFront;
-                    }
                     else
-                    {
                         cursor.position = Vector3.Lerp(cursor.position, inFront, Time.unscaledDeltaTime * posSpeed);
-                    }
 
                     cursor.LookAt(source.position);
                     if (flipForward)
-                    {
                         cursor.Rotate(Vector3.up * 180);
-                    }
                 }
             }
 
@@ -365,13 +331,10 @@ namespace Pixelplacement
             {
                 //catalog:
                 foreach (var item in Physics.RaycastAll(source.position, castDirection, raycastDistance, layermask))
-                {
                     _current.Add(item.transform);
-                }
 
                 //handle selects:
                 if (_current.Count > 0)
-                {
                     foreach (var item in _current)
                     {
                         if (_previous.Count == 0 || !_previous.Contains(item))
@@ -380,11 +343,9 @@ namespace Pixelplacement
                             if (OnSelected != null) OnSelected.Invoke(item.gameObject);
                         }
                     }
-                }
 
                 //handle deselects:
                 if (_previous.Count > 0)
-                {
                     foreach (var item in _previous)
                     {
                         if (_current.Count == 0 || !_current.Contains(item))
@@ -393,7 +354,6 @@ namespace Pixelplacement
                             if (OnDeselected != null) OnDeselected.Invoke(item.gameObject);
                         }
                     }
-                }
 
                 //cache:
                 _previous.Clear();

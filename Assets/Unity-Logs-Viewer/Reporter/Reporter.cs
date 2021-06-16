@@ -93,9 +93,7 @@ public class Reporter : MonoBehaviour
         public string GetSceneName()
         {
             if (loadedScene == 255)
-            {
                 return "AssetBundleScene";
-            }
 
             return _scenes[loadedScene];
         }
@@ -324,9 +322,7 @@ public class Reporter : MonoBehaviour
         }
         
         if (!initialized)
-        {
             Initialize();
-        }
 
 #if UNITY_CHANGE3
         SceneManager.sceneLoaded += _OnLevelWasLoaded;
@@ -348,9 +344,7 @@ public class Reporter : MonoBehaviour
     private void OnEnable()
     {
         if (_logs.Count == 0) //if recompile while in play mode
-        {
             Clear();
-        }
     }
 
     private void OnDisable()
@@ -477,9 +471,7 @@ public class Reporter : MonoBehaviour
         initialized = true;
 
         if (show)
-        {
             DoShow();
-        }
 
         _deviceModel = SystemInfo.deviceModel.ToString();
         _deviceType = SystemInfo.deviceType.ToString();
@@ -689,97 +681,67 @@ public class Reporter : MonoBehaviour
         bool filter = !string.IsNullOrEmpty(this._filterText);
         var filterText = "";
         if (filter)
-        {
             filterText = this._filterText.ToLower();
-        }
 
         _currentLog.Clear();
         if (_collapse)
-        {
             for (var i = 0; i < _collapsedLogs.Count; i++)
             {
                 var log = _collapsedLogs[i];
                 if (log.logType == LogType.Log && !_showLog)
-                {
                     continue;
-                }
 
                 if (log.logType == LogType.Warning && !_showWarning)
-                {
                     continue;
-                }
 
                 if (log.logType == LogType.Error && !_showError)
-                {
                     continue;
-                }
 
                 if (log.logType == LogType.Assert && !_showError)
-                {
                     continue;
-                }
 
                 if (log.logType == LogType.Exception && !_showError)
-                {
                     continue;
-                }
 
                 if (filter)
                 {
                     if (log.condition.ToLower().Contains(filterText))
-                    {
                         _currentLog.Add(log);
-                    }
                 }
                 else
                 {
                     _currentLog.Add(log);
                 }
             }
-        }
         else
-        {
             for (var i = 0; i < _logs.Count; i++)
             {
                 var log = _logs[i];
                 if (log.logType == LogType.Log && !_showLog)
-                {
                     continue;
-                }
 
                 if (log.logType == LogType.Warning && !_showWarning)
-                {
                     continue;
-                }
 
                 if (log.logType == LogType.Error && !_showError)
-                {
                     continue;
-                }
 
                 if (log.logType == LogType.Assert && !_showError)
-                {
                     continue;
-                }
 
                 if (log.logType == LogType.Exception && !_showError)
-                {
                     continue;
-                }
 
                 if (filter)
                 {
                     if (log.condition.ToLower().Contains(filterText))
-                    {
                         _currentLog.Add(log);
-                    }
                 }
                 else
                 {
                     _currentLog.Add(log);
                 }
             }
-        }
 
         if (_selectedLog != null)
         {
@@ -789,9 +751,7 @@ public class Reporter : MonoBehaviour
                 var collapsedSelected = _logsDic[_selectedLog.condition][_selectedLog.stacktrace];
                 newSelectedIndex = _currentLog.IndexOf(collapsedSelected);
                 if (newSelectedIndex != -1)
-                {
                     _scrollPosition.y = newSelectedIndex * size.y;
-                }
             }
             else
             {
@@ -821,14 +781,10 @@ public class Reporter : MonoBehaviour
 
         var drag = GetDrag();
         if ((drag.x != 0) && (_downPos != Vector2.zero))
-        {
             _infoScrollPosition.x -= (drag.x - _oldInfoDrag.x);
-        }
 
         if ((drag.y != 0) && (_downPos != Vector2.zero))
-        {
             _infoScrollPosition.y += (drag.y - _oldInfoDrag.y);
-        }
 
         _oldInfoDrag = drag;
 
@@ -990,9 +946,7 @@ public class Reporter : MonoBehaviour
         GUILayout.Space(this.size.x);
         if (GUILayout.Button(_backContent, _barStyle, GUILayout.Width(this.size.x * 2),
             GUILayout.Height(this.size.y * 2)))
-        {
             _currentView = ReportView.Logs;
-        }
 
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
@@ -1019,40 +973,30 @@ public class Reporter : MonoBehaviour
         if (GUILayout.Button(_clearOnNewSceneContent,
             (_showClearOnNewSceneLoadedButton) ? _buttonActiveStyle : _barStyle,
             GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
-        {
             _showClearOnNewSceneLoadedButton = !_showClearOnNewSceneLoadedButton;
-        }
 
         if (GUILayout.Button(_showTimeContent, (_showTimeButton) ? _buttonActiveStyle : _barStyle,
             GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
-        {
             _showTimeButton = !_showTimeButton;
-        }
 
         _tempRect = GUILayoutUtility.GetLastRect();
         GUI.Label(_tempRect, Time.realtimeSinceStartup.ToString("0.0"), _lowerLeftFontStyle);
         if (GUILayout.Button(_showSceneContent, (_showSceneButton) ? _buttonActiveStyle : _barStyle,
             GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
-        {
             _showSceneButton = !_showSceneButton;
-        }
 
         _tempRect = GUILayoutUtility.GetLastRect();
         GUI.Label(_tempRect, _currentScene, _lowerLeftFontStyle);
         if (GUILayout.Button(_showMemoryContent, (_showMemButton) ? _buttonActiveStyle : _barStyle,
             GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
-        {
             _showMemButton = !_showMemButton;
-        }
 
         _tempRect = GUILayoutUtility.GetLastRect();
         GUI.Label(_tempRect, _gcTotalMemory.ToString("0.0"), _lowerLeftFontStyle);
 
         if (GUILayout.Button(_showFpsContent, (_showFpsButton) ? _buttonActiveStyle : _barStyle,
             GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
-        {
             _showFpsButton = !_showFpsButton;
-        }
 
         _tempRect = GUILayoutUtility.GetLastRect();
         GUI.Label(_tempRect, fpsText, _lowerLeftFontStyle);
@@ -1064,22 +1008,16 @@ public class Reporter : MonoBehaviour
         GUI.Label( tempRect , samples.Count.ToString() , lowerLeftFontStyle );*/
         if (GUILayout.Button(_searchContent, (_showSearchText) ? _buttonActiveStyle : _barStyle,
             GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
-        {
             _showSearchText = !_showSearchText;
-        }
 
         if (GUILayout.Button(_copyContent, (_showCopyButton) ? _buttonActiveStyle : _barStyle,
             GUILayout.Width(size.x * 2),
             GUILayout.Height(size.y * 2)))
-        {
             _showCopyButton = !_showCopyButton;
-        }
 
         if (GUILayout.Button(_saveLogsContent, (_showSaveButton) ? _buttonActiveStyle : _barStyle,
             GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
-        {
             _showSaveButton = !_showSaveButton;
-        }
 
         _tempRect = GUILayoutUtility.GetLastRect();
         GUI.TextField(_tempRect, _filterText, _searchStyle);
@@ -1114,9 +1052,7 @@ public class Reporter : MonoBehaviour
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
         if (GUILayout.Button(_backContent, _barStyle, GUILayout.Width(size.x), GUILayout.Height(size.y)))
-        {
             _currentView = ReportView.Logs;
-        }
 
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
@@ -1139,9 +1075,7 @@ public class Reporter : MonoBehaviour
         GUI.skin = _toolbarScrollerSkin;
         var drag = GetDrag();
         if ((drag.x != 0) && (_downPos != Vector2.zero) && (_downPos.y > Screen.height - size.y * 2f))
-        {
             _toolbarScrollPosition.x -= (drag.x - _toolbarOldDrag);
-        }
 
         _toolbarOldDrag = drag.x;
         GUILayout.BeginArea(_toolBarRect);
@@ -1149,9 +1083,7 @@ public class Reporter : MonoBehaviour
         GUILayout.BeginHorizontal(_barStyle);
 
         if (GUILayout.Button(_clearContent, _barStyle, GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
-        {
             Clear();
-        }
 
         if (GUILayout.Button(_collapseContent, (_collapse) ? _buttonActiveStyle : _barStyle,
             GUILayout.Width(size.x * 2),
@@ -1164,15 +1096,11 @@ public class Reporter : MonoBehaviour
         if (_showClearOnNewSceneLoadedButton && GUILayout.Button(_clearOnNewSceneContent,
                 (_clearOnNewSceneLoaded) ? _buttonActiveStyle : _barStyle, GUILayout.Width(size.x * 2),
                 GUILayout.Height(size.y * 2)))
-        {
             _clearOnNewSceneLoaded = !_clearOnNewSceneLoaded;
-        }
 
         if (_showTimeButton && GUILayout.Button(_showTimeContent, (_showTime) ? _buttonActiveStyle : _barStyle,
                 GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
-        {
             _showTime = !_showTime;
-        }
 
         if (_showSceneButton)
         {
@@ -1180,9 +1108,7 @@ public class Reporter : MonoBehaviour
             GUI.Label(_tempRect, Time.realtimeSinceStartup.ToString("0.0"), _lowerLeftFontStyle);
             if (GUILayout.Button(_showSceneContent, (_showScene) ? _buttonActiveStyle : _barStyle,
                 GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
-            {
                 _showScene = !_showScene;
-            }
 
             _tempRect = GUILayoutUtility.GetLastRect();
             GUI.Label(_tempRect, _currentScene, _lowerLeftFontStyle);
@@ -1192,9 +1118,7 @@ public class Reporter : MonoBehaviour
         {
             if (GUILayout.Button(_showMemoryContent, (_showMemory) ? _buttonActiveStyle : _barStyle,
                 GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
-            {
                 _showMemory = !_showMemory;
-            }
 
             _tempRect = GUILayoutUtility.GetLastRect();
             GUI.Label(_tempRect, _gcTotalMemory.ToString("0.0"), _lowerLeftFontStyle);
@@ -1205,9 +1129,7 @@ public class Reporter : MonoBehaviour
             if (GUILayout.Button(_showFpsContent, (_showFps) ? _buttonActiveStyle : _barStyle,
                 GUILayout.Width(size.x * 2),
                 GUILayout.Height(size.y * 2)))
-            {
                 _showFps = !_showFps;
-            }
 
             _tempRect = GUILayoutUtility.GetLastRect();
             GUI.Label(_tempRect, fpsText, _lowerLeftFontStyle);
@@ -1232,34 +1154,22 @@ public class Reporter : MonoBehaviour
         }
 
         if (_showCopyButton)
-        {
             if (GUILayout.Button(_copyContent, _barStyle, GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
             {
                 if (_selectedLog == null)
-                {
                     GUIUtility.systemCopyBuffer = "No log selected";
-                }
                 else
-                {
                     GUIUtility.systemCopyBuffer = _selectedLog.condition + Environment.NewLine +
                                                   Environment.NewLine + _selectedLog.stacktrace;
-                }
             }
-        }
 
         if (_showSaveButton)
-        {
             if (GUILayout.Button(_saveLogsContent, _barStyle, GUILayout.Width(size.x * 2),
                 GUILayout.Height(size.y * 2)))
-            {
                 SaveLogsToDevice();
-            }
-        }
 
         if (GUILayout.Button(_infoContent, _barStyle, GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
-        {
             _currentView = ReportView.Info;
-        }
 
 
         GUILayout.FlexibleSpace();
@@ -1267,33 +1177,21 @@ public class Reporter : MonoBehaviour
 
         var logsText = " ";
         if (_collapse)
-        {
             logsText += _numOfCollapsedLogs;
-        }
         else
-        {
             logsText += _numOfLogs;
-        }
 
         var logsWarningText = " ";
         if (_collapse)
-        {
             logsWarningText += _numOfCollapsedLogsWarning;
-        }
         else
-        {
             logsWarningText += _numOfLogsWarning;
-        }
 
         var logsErrorText = " ";
         if (_collapse)
-        {
             logsErrorText += _numOfCollapsedLogsError;
-        }
         else
-        {
             logsErrorText += _numOfLogsError;
-        }
 
         GUILayout.BeginHorizontal((_showLog) ? _buttonActiveStyle : _barStyle);
         if (GUILayout.Button(_logContent, _nonStyle, GUILayout.Width(size.x * 2), GUILayout.Height(size.y * 2)))
@@ -1374,9 +1272,7 @@ public class Reporter : MonoBehaviour
         var drag = GetDrag();
 
         if (drag.y != 0 && _logsRect.Contains(new Vector2(_downPos.x, Screen.height - _downPos.y)))
-        {
             _scrollPosition.y += (drag.y - _oldDrag);
-        }
 
         _scrollPosition = GUILayout.BeginScrollView(_scrollPosition);
 
@@ -1408,55 +1304,35 @@ public class Reporter : MonoBehaviour
         for (int i = _startIndex; (_startIndex + index) < endIndex; i++)
         {
             if (i >= _currentLog.Count)
-            {
                 break;
-            }
 
             var log = _currentLog[i];
 
             if (log.logType == LogType.Log && !_showLog)
-            {
                 continue;
-            }
 
             if (log.logType == LogType.Warning && !_showWarning)
-            {
                 continue;
-            }
 
             if (log.logType == LogType.Error && !_showError)
-            {
                 continue;
-            }
 
             if (log.logType == LogType.Assert && !_showError)
-            {
                 continue;
-            }
 
             if (log.logType == LogType.Exception && !_showError)
-            {
                 continue;
-            }
 
             if (index >= totalVisibleCount)
-            {
                 break;
-            }
 
             GUIContent content = null;
             if (log.logType == LogType.Log)
-            {
                 content = _logContent;
-            }
             else if (log.logType == LogType.Warning)
-            {
                 content = _warningContent;
-            }
             else
-            {
                 content = _errorContent;
-            }
             //content.text = log.condition ;
 
             var currentLogStyle = ((_startIndex + index) % 2 == 0) ? _evenLogStyle : _oddLogStyle;
@@ -1472,24 +1348,18 @@ public class Reporter : MonoBehaviour
             _tempContent.text = log.count.ToString();
             var w = 0f;
             if (_collapse)
-            {
                 w = _barStyle.CalcSize(_tempContent).x + 3;
-            }
 
             _countRect.x = Screen.width - w;
             _countRect.y = size.y * i;
             if (beforeHeight > 0)
-            {
                 _countRect.y += 8; //i will check later why
-            }
 
             _countRect.width = w;
             _countRect.height = size.y;
 
             if (scrollerVisible)
-            {
                 _countRect.x -= size.x * 2;
-            }
 
             var sample = _samples[log.sampleId];
             _fpsRect = _countRect;
@@ -1575,16 +1445,12 @@ public class Reporter : MonoBehaviour
             else
             {
                 if (GUILayout.Button(content, _nonStyle, GUILayout.Width(size.x), GUILayout.Height(size.y)))
-                {
-                    //selectedIndex = startIndex + index ;
+                //selectedIndex = startIndex + index ;
                     _selectedLog = log;
-                }
 
                 if (GUILayout.Button(log.condition, _logButtonStyle))
-                {
-                    //selectedIndex = startIndex + index ;
+                //selectedIndex = startIndex + index ;
                     _selectedLog = log;
-                }
 
                 //GUILayout.FlexibleSpace();
                 if (_showTime)
@@ -1613,9 +1479,7 @@ public class Reporter : MonoBehaviour
             }
 
             if (_collapse)
-            {
                 GUI.Label(_countRect, log.count.ToString(), _barStyle);
-            }
 
             GUILayout.EndHorizontal();
             index++;
@@ -1639,13 +1503,9 @@ public class Reporter : MonoBehaviour
         _buttomRect.height = size.y;
 
         if (_showGraph)
-        {
             DrawGraph();
-        }
         else
-        {
             DrawStack();
-        }
     }
 
 
@@ -1681,9 +1541,7 @@ public class Reporter : MonoBehaviour
 
             var p = _downPos;
             if (p != Vector2.zero)
-            {
                 _currentFrame = _startFrame + (int) (p.x / _graphSize);
-            }
         }
 
         _oldDrag3 = drag.x;
@@ -1692,9 +1550,7 @@ public class Reporter : MonoBehaviour
         _graphScrollerPos = GUILayout.BeginScrollView(_graphScrollerPos);
         _startFrame = (int) (_graphScrollerPos.x / _graphSize);
         if (_graphScrollerPos.x >= (_samples.Count * _graphSize - Screen.width))
-        {
             _graphScrollerPos.x += _graphSize;
-        }
 
         GUILayout.Label(" ", GUILayout.Width(_samples.Count * _graphSize));
         GUILayout.EndScrollView();
@@ -1707,30 +1563,20 @@ public class Reporter : MonoBehaviour
         {
             int index = _startFrame + i;
             if (index >= _samples.Count)
-            {
                 break;
-            }
 
             var s = _samples[index];
             if (_maxFpsValue < s.fps)
-            {
                 _maxFpsValue = s.fps;
-            }
 
             if (_minFpsValue > s.fps)
-            {
                 _minFpsValue = s.fps;
-            }
 
             if (_maxMemoryValue < s.memory)
-            {
                 _maxMemoryValue = s.memory;
-            }
 
             if (_minMemoryValue > s.memory)
-            {
                 _minMemoryValue = s.memory;
-            }
         }
 
         //GUI.BeginGroup(graphRect);
@@ -1806,9 +1652,7 @@ public class Reporter : MonoBehaviour
         {
             var drag = GetDrag();
             if (drag.y != 0 && _stackRect.Contains(new Vector2(_downPos.x, Screen.height - _downPos.y)))
-            {
                 _scrollPosition2.y += drag.y - _oldDrag2;
-            }
 
             _oldDrag2 = drag.y;
 
@@ -1874,9 +1718,7 @@ public class Reporter : MonoBehaviour
     public void OnGuiDraw()
     {
         if (!show)
-        {
             return;
-        }
 
         _screenRect.x = 0;
         _screenRect.y = 0;
@@ -1919,9 +1761,7 @@ public class Reporter : MonoBehaviour
     {
         if (Application.platform == RuntimePlatform.Android ||
             Application.platform == RuntimePlatform.IPhonePlayer)
-        {
             return CheckMobileInput();
-        }
 
         return Input.GetKeyDown(KeyCode.BackQuote);
     }
@@ -1941,9 +1781,7 @@ public class Reporter : MonoBehaviour
         float oldDistance = Vector2.Distance(oldPosition1, oldPosition2);
 
         if (oldDistance == 0 || distance == 0)
-        {
             return 1.0f;
-        }
 
         return distance / oldDistance;
     }
@@ -1986,9 +1824,7 @@ public class Reporter : MonoBehaviour
             Application.platform == RuntimePlatform.IPhonePlayer)
         {
             if (Input.touches.Length != 1)
-            {
                 return Vector2.zero;
-            }
 
             return Input.touches[0].position - _downPos;
         }
@@ -2050,9 +1886,7 @@ public class Reporter : MonoBehaviour
 #if UNITY_CHANGE3
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (sceneIndex != -1 && string.IsNullOrEmpty(_scenes[sceneIndex]))
-        {
             _scenes[SceneManager.GetActiveScene().buildIndex] = SceneManager.GetActiveScene().name;
-        }
 #else
 		int sceneIndex = Application.loadedLevel;
 		if (sceneIndex != -1 && string.IsNullOrEmpty(scenes[Application.loadedLevel]))
@@ -2061,13 +1895,10 @@ public class Reporter : MonoBehaviour
 
         CalculateStartIndex();
         if (!show && IsGestureDone())
-        {
             DoShow();
-        }
 
 
         if (_threadedLogs.Count > 0)
-        {
             lock (_threadedLogs)
             {
                 for (var i = 0; i < _threadedLogs.Count; i++)
@@ -2078,7 +1909,6 @@ public class Reporter : MonoBehaviour
 
                 _threadedLogs.Clear();
             }
-        }
 
 #if UNITY_CHANGE1
 		float elapsed2 = Time.realtimeSinceStartup - lastUpdate2;
@@ -2206,9 +2036,7 @@ public class Reporter : MonoBehaviour
         _logs.Add(log);
 
         if (log.logType == LogType.Error || log.logType == LogType.Exception)
-        {
             onErrorLogRaised?.Invoke();
-        }
 
         if (!_collapse || isNew)
         {
@@ -2217,13 +2045,11 @@ public class Reporter : MonoBehaviour
                         log.logType == LogType.Exception && !_showError;
 
             if (!skip)
-            {
                 if (string.IsNullOrEmpty(_filterText) || log.condition.ToLower().Contains(_filterText.ToLower()))
                 {
                     _currentLog.Add(log);
                     newLogAdded = true;
                 }
-            }
         }
 
         if (newLogAdded)
@@ -2232,9 +2058,7 @@ public class Reporter : MonoBehaviour
             int totalCount = _currentLog.Count;
             var totalVisibleCount = (int) (Screen.height * 0.75f / size.y);
             if (_startIndex >= (totalCount - totalVisibleCount))
-            {
                 _scrollPosition.y += size.y;
-            }
         }
 
         try
@@ -2274,9 +2098,7 @@ public class Reporter : MonoBehaviour
     private void _OnLevelWasLoaded(Scene null1, LoadSceneMode null2)
     {
         if (_clearOnNewSceneLoaded)
-        {
             Clear();
-        }
 
 #if UNITY_CHANGE3
         _currentScene = SceneManager.GetActiveScene().name;
@@ -2326,18 +2148,14 @@ public class Reporter : MonoBehaviour
         {
             string streamingAssetsPath = Application.streamingAssetsPath;
             if (streamingAssetsPath == "")
-            {
                 streamingAssetsPath = Application.dataPath + "/StreamingAssets/";
-            }
 
             url = Path.Combine(streamingAssetsPath, prefFile);
         }
 
         //if (Application.platform != RuntimePlatform.OSXWebPlayer && Application.platform != RuntimePlatform.WindowsWebPlayer)
         if (!url.Contains("://"))
-        {
             url = "file://" + url;
-        }
 
 
         // float startTime = Time.realtimeSinceStartup;
@@ -2373,9 +2191,7 @@ public class Reporter : MonoBehaviour
         File.Delete(filePath);
 
         foreach (var log in _logs)
-        {
             fileContentsList.Add(log.logType + "\n" + log.condition + "\n" + log.stacktrace);
-        }
 
         File.WriteAllLines(filePath, fileContentsList.ToArray());
     }

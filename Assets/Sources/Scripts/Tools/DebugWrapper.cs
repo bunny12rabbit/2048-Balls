@@ -49,9 +49,7 @@ public static class DebugWrapper
         var newMessage = string.Empty;
 
         foreach (string str in newLineSplit)
-        {
             newMessage += $"<color={colorName}>{str}</color>\n";
-        }
 
         return newMessage;
     }

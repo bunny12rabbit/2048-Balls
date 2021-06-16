@@ -61,10 +61,8 @@ namespace Generics.UI
         public virtual void OnHide()
         {
             if (!IsCanHideWindow)
-            {
                 return;
-            }
-            
+
             IsShown = false;
             IsVisible = false;
             
@@ -86,9 +84,7 @@ namespace Generics.UI
             _reversedAnimationCurve = animationCurve?.Reverse();
 
             if (panel)
-            {
                 return;
-            }
 
             panel = GetComponent<CanvasGroup>();
         }
@@ -96,9 +92,7 @@ namespace Generics.UI
         protected virtual void OnEnable()
         {
             if (!closeButton)
-            {
                 return;
-            }
 
             closeButton.gameObject.SetActive(IsCanHideWindow);
             closeButton.AddOnClickAnimationCompleteListener(Hide);
@@ -107,10 +101,8 @@ namespace Generics.UI
         protected virtual void OnDisable()
         {
             if (!closeButton)
-            {
                 return;
-            }
-            
+
             closeButton.RemoveOnClickAnimationCompleteListener(Hide);
         }
 
@@ -121,29 +113,21 @@ namespace Generics.UI
             var newAnimationCurve = IsShown ? animationCurve : _reversedAnimationCurve;
 
             if (IsShown)
-            {
                 gameObject.SetActive(true);
-            }
             else
-            {
                 callBack = () => gameObject.SetActive(false);
-            }
 
             StartCoroutine(SmoothlyChangeAlpha(IsShown, callBack));
 
             if (isAnimate)
-            {
                 Tween.LocalScale(windowContent, Vector3.zero, Vector3.one, animationDuration, 0, newAnimationCurve,
                     Tween.LoopType.None, null, callBack);
-            }
         }
 
         private IEnumerator SmoothlyChangeAlpha(bool isShow, Action callback = null)
         {
             if (!panel)
-            {
                 yield break;
-            }
 
             panel.alpha = isShow ? 0 : 1;
             int targetAlpha = isShow ? 1 : 0;

@@ -9,11 +9,10 @@ namespace Controllers
     public class AppStartController : MonoBehaviour
     {
         [SerializeField] private Image panel;
-        
+
         [SerializeField] private TMP_Text text;
-        
-        [Space]
-        private float _fadeDuration;
+
+        [Space] private float _fadeDuration;
         [SerializeField] private float logoDuration = 1f;
 
         [SerializeField] private Color targetColor = Color.white;
@@ -24,13 +23,11 @@ namespace Controllers
         private void Start()
         {
             if (panel == null)
-            {
                 return;
-            }
 
             _textCanvasGroup = text.gameObject.GetOrAddComponent<CanvasGroup>();
             _fadeDuration = logoDuration * 0.25f;
-            
+
             this.TryStartCoroutineOnTicker(StartLogoAnimation());
         }
 
@@ -39,7 +36,7 @@ namespace Controllers
             _textCanvasGroup.alpha = 0;
             var textTargetColor = Color.black;
             float duration = logoDuration * 0.5f;
-            
+
             yield return this.TryStartCoroutineOnTicker(Fade(1));
 
             Tween.Value(text.color, textTargetColor, color => text.color = color, duration, 0);

@@ -36,9 +36,7 @@ public class CFX_LightIntensityFade : MonoBehaviour
 		p_lifetime = 0.0f;
 		p_delay = delay;
 		if(delay > 0)
-		{
 			GetComponent<Light>().enabled = false;
-		}
 	}
 
 	private void Update ()
@@ -47,9 +45,7 @@ public class CFX_LightIntensityFade : MonoBehaviour
 		{
 			p_delay -= Time.deltaTime;
 			if(p_delay <= 0)
-			{
 				GetComponent<Light>().enabled = true;
-			}
 			return;
 		}
 		
@@ -61,9 +57,7 @@ public class CFX_LightIntensityFade : MonoBehaviour
 		else
 		{
 			if(autodestruct)
-			{
 				Destroy(gameObject);
-			}
 		}
 		
 	}

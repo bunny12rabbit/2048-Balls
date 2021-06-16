@@ -42,9 +42,7 @@ namespace Generics
             var particleSystemManager = vfx.GetComponent<ParticleSystemManager>();
 
             if (particleSystemManager)
-            {
                 particleSystemManager.ChangeColor(previousColor);
-            }
         }
 
         public void SpawnWinVfx() => SpawnVfx(winVfxPath);
@@ -52,14 +50,10 @@ namespace Generics
         public void OnCollisionDetected(IMatchableItem<T> other)
         {
             if (GameManager.Instance.IsWin)
-            {
                 return;
-            }
-            
+
             if (CheckMatch(other))
-            {
                 OnMatch(other);
-            }
         }
 
         protected void InitializeComponents()
@@ -89,9 +83,7 @@ namespace Generics
         public static bool operator ==(MatchableItemGeneric<T> item1, MatchableItemGeneric<T> item2)
         {
             if (item1 is null || item2 is null)
-            {
                 return false;
-            }
 
             return item1.Data.Criteria.Equals(item2.Data.Criteria);
         }
@@ -99,9 +91,7 @@ namespace Generics
         public static bool operator !=(MatchableItemGeneric<T> ball1, MatchableItemGeneric<T> ball2)
         {
             if (ball1 is null || ball2 is null)
-            {
                 return false;
-            }
 
             return ball1.Data.Criteria.Equals(ball2.Data.Criteria) == false;
         }

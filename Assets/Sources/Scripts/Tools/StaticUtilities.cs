@@ -25,9 +25,7 @@ namespace StaticTools
         public static int GetPowerOfTwo(uint number)
         {
             if (number <= 0)
-            {
                 throw new ArgumentException("Number must be positive!");
-            }
 
             return (int)Math.Log(number & -number, 2);
         }

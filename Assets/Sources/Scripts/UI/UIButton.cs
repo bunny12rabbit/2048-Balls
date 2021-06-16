@@ -29,9 +29,7 @@ namespace UI
             get
             {
                 if (_button == null)
-                {
                     _button = GetComponent<Button>();
-                }
 
                 return _button;
             }

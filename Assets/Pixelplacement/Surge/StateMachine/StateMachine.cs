@@ -122,11 +122,9 @@ namespace Pixelplacement
             if (currentState == null) return ChangeState (0);
             int currentIndex = currentState.transform.GetSiblingIndex();
             if (currentIndex == transform.childCount - 1)
-            {
-                return currentState;	
-            }else{
+                return currentState;
+            else
                 return ChangeState (++currentIndex);
-            }
         }
 
         /// <summary>
@@ -137,11 +135,9 @@ namespace Pixelplacement
             if (currentState == null) return ChangeState(0);
             int currentIndex = currentState.transform.GetSiblingIndex();
             if (currentIndex == 0)
-            {
-                return currentState;	
-            }else{
+                return currentState;
+            else
                 return ChangeState(--currentIndex);
-            }
         }
 
         /// <summary>
@@ -183,13 +179,11 @@ namespace Pixelplacement
         public GameObject ChangeState (GameObject state)
         {
             if (currentState != null)
-            {
                 if (!allowReentry && state == currentState)
                 {
                     Log("State change ignored. State machine \"" + name + "\" already in \"" + state.name + "\" state.");
                     return null;
                 }
-            }
 
             if (state.transform.parent != transform)
             {
@@ -225,9 +219,7 @@ namespace Pixelplacement
         {
             //turn off all states:
             for (int i = 0; i < transform.childCount; i++)
-            {
                 transform.GetChild(i).gameObject.SetActive(false);
-            }
         }
         
         /// <summary>
@@ -247,15 +239,11 @@ namespace Pixelplacement
 
             //entering first:
             if (index == 0)
-            {
                 AtFirst = true;
-            }
 
             //entering last:
             if (index == transform.childCount - 1)
-            {
-                AtLast = true;	
-            }
+                AtLast = true;
 
             Log( "(+) " + name + " ENTERED state: " + state.name);
             if (OnStateEntered != null) OnStateEntered.Invoke (currentState);

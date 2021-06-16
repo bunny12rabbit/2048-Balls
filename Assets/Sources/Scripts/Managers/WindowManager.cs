@@ -40,10 +40,8 @@ namespace Managers
             var window = GetWindowByType(windowType);
 
             if (window.IsShown)
-            {
                 DebugWrapper.LogError(
                     $"This window is already shown: {windowType}\n{StackTraceUtility.ExtractStackTrace()}");
-            }
 
             _shownWindows.Add(window);
 
@@ -68,9 +66,7 @@ namespace Managers
             bool isCannotHide = window == null || !window.IsShown || !window.IsCanHideWindow;
             
             if (isCannotHide)
-            {
                 return;
-            }
 
             _shownWindows.Remove(window);
 
@@ -81,9 +77,7 @@ namespace Managers
             OnSomeWindowHide?.Invoke(window);
 
             if (IsHaveTopWindow)
-            {
                 OnSomeWindowVisible?.Invoke(TopWindow);
-            }
         }
 
 
@@ -129,9 +123,7 @@ namespace Managers
         {
             int childCount = parent.childCount;
             for (var i = 0; i < childCount; i++)
-            {
                 Destroy(parent.GetChild(i).gameObject);
-            }
         }
 
         private void CreateWindows()
@@ -143,9 +135,7 @@ namespace Managers
                 windowObject.SetActive(false);
 
                 if (!RegisterWindowType(window))
-                {
                     Destroy(window);
-                }
             }
         }
 
@@ -154,9 +144,7 @@ namespace Managers
             bool isNeedToHideWindow = Input.GetKeyDown(KeyCode.Escape) && IsHaveTopWindow && TopWindow.IsCanHideWindow;
             
             if (isNeedToHideWindow)
-            {
                 TopWindow.Hide();
-            }
         }
 
         private bool RegisterWindowType(BaseWindow window)

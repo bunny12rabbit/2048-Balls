@@ -80,15 +80,11 @@ public static class Extensions
 
 #if UNITY_EDITOR
         if (!Application.isPlaying)
-        {
             Undo.RegisterCreatedObjectUndo(gameObject, "CreateObject");
-        }
 #endif
 
         if (gameObject && parent)
-        {
             InitializeGameObject(parent, gameObject);
-        }
 
         return gameObject;
     }
@@ -105,9 +101,7 @@ public static class Extensions
         gameObject.AddComponent<RectTransform>();
 
         if (parent)
-        {
             InitializeGameObject(parent, gameObject);
-        }
 
         return gameObject;
     }
@@ -166,14 +160,10 @@ public static class Extensions
     public static void DoActionWithCheckReference(this Object reference, Action action)
     {
         if (reference != null)
-        {
             action.Invoke();
-        }
         else
-        {
             DebugWrapper.LogError($"{nameof(reference)} is null! Assign the reference!",
                 DebugColors.Red);
-        }
     }
 
     #endregion

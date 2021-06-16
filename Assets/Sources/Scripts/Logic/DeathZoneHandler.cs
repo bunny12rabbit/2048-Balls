@@ -19,9 +19,7 @@ namespace Logic
         private void CheckReference()
         {
             if (trigger)
-            {
                 return;
-            }
 
             trigger = GetComponent<Collider2D>();
         }
@@ -29,20 +27,14 @@ namespace Logic
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.gameObject.CompareTag(TagsNames.GetTag(comparingTag)))
-            {
                 return;
-            }
 
             var parent = other.transform.parent;
 
             if (parent)
-            {
                 parent.gameObject.PushBackToPool();
-            }
             else
-            {
                 other.gameObject.PushBackToPool();
-            }
         }
     }
 }

@@ -35,9 +35,7 @@ namespace Controllers
                             criteria <= _criteriaRangeToSpawn[GameManager.Instance.RangeToSpawnCount - 1];
 
             if (isNewMax)
-            {
                 _maxSpawnedCriteria = criteria;
-            }
         }
 
         public MatchableItemGeneric<uint> SpawnBallLock(Vector3 position)
@@ -68,9 +66,7 @@ namespace Controllers
         private void OnNeedToSpawnNewItem()
         {
             if (GameManager.Instance.IsWin)
-            {
                 return;
-            }
 
             SpawnNewItemWithDelay(SPAWN_DELAY);
         }
@@ -78,9 +74,7 @@ namespace Controllers
         private void SpawnNewItemWithDelay(float delay)
         {
             if (_isSpawnRunning)
-            {
                 return;
-            }
 
             StartCoroutine(SpawnWithDelayCoroutine(delay));
         }

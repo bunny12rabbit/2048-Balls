@@ -56,11 +56,9 @@ namespace Pixelplacement.TweenSystem
             if (_faceDirection)
             {
                 if (_spline.direction == SplineDirection.Forward)
-                {
                     _target.LookAt (_target.position + _spline.GetDirection (calculatedValue));
-                }else{
+                else
                     _target.LookAt (_target.position - _spline.GetDirection (calculatedValue));
-                }
             }
         }
 

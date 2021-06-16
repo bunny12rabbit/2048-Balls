@@ -28,13 +28,9 @@ public class CFX_AutoDestructShuriken : MonoBehaviour
             if (!ps.IsAlive(true))
             {
                 if (onlyDeactivate)
-                {
                     gameObject.SetActive(false);
-                }
                 else
-                {
                     Destroy(gameObject);
-                }
 
                 break;
             }

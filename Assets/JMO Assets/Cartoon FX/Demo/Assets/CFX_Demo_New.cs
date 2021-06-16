@@ -59,18 +59,12 @@ public class CFX_Demo_New : MonoBehaviour
 	void Update()
 	{
 		if(Input.GetKeyDown(KeyCode.LeftArrow))
-		{
 			prevParticle();
-		}
 		else if(Input.GetKeyDown(KeyCode.RightArrow))
-		{
 			nextParticle();
-		}
 		else if(Input.GetKeyDown(KeyCode.Delete))
-		{
 			destroyParticles();
-		}
-		
+
 		if(Input.GetMouseButtonDown(0))
 		{
 			RaycastHit hit = new RaycastHit();
@@ -83,10 +77,8 @@ public class CFX_Demo_New : MonoBehaviour
 		
 		float scroll = Input.GetAxis("Mouse ScrollWheel");
 		if(scroll != 0f)
-		{
 			Camera.main.transform.Translate(Vector3.forward * (scroll < 0f ? -1f : 1f), Space.Self);
-		}
-		
+
 		if(Input.GetMouseButtonDown(2))
 		{
 			Camera.main.transform.position = defaultCamPosition;
@@ -202,9 +194,7 @@ public class CFX_Demo_New : MonoBehaviour
 			for(int i = onScreenParticles.Count - 1; i >= 0; i--)
 			{
 				if(onScreenParticles[i] == null)
-				{
 					onScreenParticles.RemoveAt(i);
-				}
 			}
 		}
 	}
@@ -229,10 +219,8 @@ public class CFX_Demo_New : MonoBehaviour
 		for(int i = onScreenParticles.Count - 1; i >= 0; i--)
 		{
 			if(onScreenParticles[i] != null)
-			{
 				GameObject.Destroy(onScreenParticles[i]);
-			}
-			
+
 			onScreenParticles.RemoveAt(i);
 		}
 	}

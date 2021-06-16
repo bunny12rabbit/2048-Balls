@@ -52,11 +52,9 @@ namespace Pixelplacement
             if (faceDirection)
             {
                 if (spline.direction == SplineDirection.Forward)
-                {
                     target.LookAt (target.position + spline.GetDirection (percentage));
-                }else{
+                else
                     target.LookAt (target.position - spline.GetDirection (percentage));
-                }
             }
 
             target.position = spline.GetPosition (percentage);

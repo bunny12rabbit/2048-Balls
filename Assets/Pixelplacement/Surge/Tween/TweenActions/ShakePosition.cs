@@ -42,9 +42,7 @@ namespace Pixelplacement.TweenSystem
         protected override void Operation (float percentage)
         {
             if (percentage == 0)
-            {
                 _target.localPosition = _initialPosition;
-            }
 
             percentage = 1 - percentage;
 

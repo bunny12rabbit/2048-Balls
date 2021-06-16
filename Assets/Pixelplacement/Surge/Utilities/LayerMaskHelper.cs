@@ -47,9 +47,7 @@ namespace Pixelplacement
         {
             int mask = 0;
             foreach (int item in layers)
-            {
                 mask |= 1 << item;
-            }
             return mask;
         }
     }

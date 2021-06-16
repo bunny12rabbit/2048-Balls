@@ -23,26 +23,18 @@ namespace InputSystems
         private void Update()
         {
             if (StaticUtilities.IsPointerOverUIObject())
-            {
                 return;
-            }
 
             var inputPosition = Input.mousePosition;
 
             if (IsPressed)
-            {
                 OnPress?.Invoke(inputPosition);
-            }
 
             if (IsDrag)
-            {
                 OnDrag?.Invoke(inputPosition);
-            }
 
             if (IsReleased)
-            {
                 OnRelease?.Invoke();
-            }
         }
     }
 }

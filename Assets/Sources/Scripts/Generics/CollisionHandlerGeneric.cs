@@ -53,14 +53,10 @@ namespace Generics
         private void ProcessCollision(Collision2D other)
         {
             if (!TryGetIMatchable(other, out var otherMatchable))
-            {
                 return;
-            }
 
-            if (otherMatchable != null)
-            {
+            if (otherMatchable?.Data != null)
                 _matchable.OnCollisionDetected(otherMatchable);
-            }
         }
 
         private bool TryGetIMatchable(Collision2D other, out IMatchableItem<T> otherMatchable)

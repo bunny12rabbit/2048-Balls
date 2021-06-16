@@ -53,9 +53,7 @@ namespace InputSystems
         public void OnPress(Vector3 position)
         {
             if (!_isCanControl)
-            {
                 return;
-            }
 
             _isControlled = true;
             _initialPosition = GetNewWorldPosition(position);
@@ -66,9 +64,7 @@ namespace InputSystems
         public void OnDrag(Vector3 position)
         {
             if (!_isControlled)
-            {
                 return;
-            }
 
             _newPosition = GetNewWorldPosition(position) - _offset;
         }
@@ -76,9 +72,7 @@ namespace InputSystems
         public void OnRelease()
         {
             if (!_isCanControl && !_isControlled)
-            {
                 return;
-            }
 
             _collisionHandler.SwitchPhysics(true);
             _isControlled = false;
@@ -97,9 +91,7 @@ namespace InputSystems
         private void FixedUpdate()
         {
             if (!_isControlled)
-            {
                 return;
-            }
 
             _collisionHandler.MoveToPosition(_initialTargetPosition, _newPosition);
         }

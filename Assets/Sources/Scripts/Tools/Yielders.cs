@@ -23,9 +23,7 @@ public static class Yielders
     public static WaitForSeconds WaitForSeconds(float seconds)
     {
         if (!_timeIntervals.TryGetValue(seconds, out var waitForSeconds))
-        {
             _timeIntervals.Add(seconds, waitForSeconds = new WaitForSeconds(seconds));
-        }
 
         return waitForSeconds;
     }

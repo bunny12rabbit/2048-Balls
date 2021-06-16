@@ -23,8 +23,6 @@ public class CFX_Demo_RandomDirectionTranslate : MonoBehaviour
 		this.transform.Translate(dir * speed * Time.deltaTime);
 		
 		if(gravity)
-		{
 			this.transform.Translate(Physics.gravity * Time.deltaTime);
-		}
 	}
 }

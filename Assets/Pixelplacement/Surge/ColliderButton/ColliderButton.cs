@@ -105,16 +105,12 @@ namespace Pixelplacement
             //hook up image to help users:
             Image image = GetComponent<Image>();
             if (image != null)
-            {
                 colorImageTarget = image;
-            }
 
             //hook up renderer to help users:
             Renderer renderer = GetComponent<Renderer>();
             if (renderer != null && renderer.sharedMaterial.HasProperty("_Color"))
-            {
                 colorRendererTarget = renderer;
-            }
         }
 
         private void Awake()
@@ -123,16 +119,11 @@ namespace Pixelplacement
             {
                 //color setups:
                 if (colorRendererTarget != null)
-                {
                     if (colorRendererTarget.material.HasProperty("_Color"))
-                    {
                         _normalColorRenderer = colorRendererTarget.material.color;
-                    }
-                }
+
                 if (colorImageTarget != null)
-                {
                     _normalColorImage = colorImageTarget.color;
-                }
             }
 
             //scale setup:
@@ -216,30 +207,22 @@ namespace Pixelplacement
             if (_interactableStatus != interactable)
             {
                 if (interactable)
-                {
                     ColorNormal();
-                }
                 else
-                {
                     ColorDisabled();
-                }
 
                 //handle a Unity GUI button in case it is also attached:
                 Button button = GetComponent<Button>();
                 if (button != null)
-                {
                     button.interactable = interactable;
-                }
 
                 _interactableStatus = interactable;
             }
 
             //update gui colliders:
             if (resizeGUIBoxCollider && _rectTransform != null && _boxCollider != null)
-            {
-                //fit a box collider:
+            //fit a box collider:
                 ResizeGUIBoxCollider(_boxCollider);
-            }
 
             //for in editor updating of the gui collider:
             if (!Application.isPlaying) return;
@@ -269,7 +252,6 @@ namespace Pixelplacement
 
             //process input:
             if (keyInput != null && _selectedCount > 0)
-            {
                 foreach (var item in keyInput)
                 {
                     if (Input.GetKeyDown(item))
@@ -279,20 +261,15 @@ namespace Pixelplacement
                     }
 
                     if (Input.GetKeyUp(item))
-                    {
                         Released();
-                    }
                 }
-            }
         }
 
         //Event Handlers:
         private void OnTriggerStay(Collider other)
         {
             if (_colliderCount == 0)
-            {
                 _colliderCount++;
-            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -340,9 +317,7 @@ namespace Pixelplacement
             if (Array.IndexOf(keyInput, KeyCode.Mouse0) == -1) return;
             Released();
             if (Application.isMobilePlatform)
-            {
                 Deselected();
-            }
         }
 
         private void OnMouseEnter()
@@ -400,10 +375,7 @@ namespace Pixelplacement
 
             //handheld devices normally have touch screens which means selection is not a separate phase:
             if (SystemInfo.deviceType != DeviceType.Handheld)
-            {
                 if (_selectedCount <= 0) return;
-
-            }
 
             if (_pressed) return;
             _pressed = true;
@@ -458,28 +430,20 @@ namespace Pixelplacement
         {
             //stop running tweens:
             if (_colorTweenImage != null)
-            {
                 _colorTweenImage.Stop();
-            }
 
             if (_colorTweenMaterial != null)
-            {
                 _colorTweenMaterial.Stop();
-            }
 
             if (!applyColor) return;
 
             //reset material color:
             if (colorRendererTarget != null && colorRendererTarget.material.HasProperty("_Color"))
-            {
                 colorRendererTarget.material.color = _normalColorRenderer;
-            }
 
             //reset image color:
             if (colorImageTarget != null)
-            {
                 colorImageTarget.color = _normalColorImage;
-            }
         }
 
         private void ColorNormal()
@@ -488,15 +452,11 @@ namespace Pixelplacement
 
             //tween material color:
             if (colorRendererTarget != null && colorRendererTarget.material.HasProperty("_Color"))
-            {
                 _colorTweenMaterial = Tween.Color(colorRendererTarget, _normalColorRenderer, colorDuration, 0, null, Tween.LoopType.None, null, null, false);
-            }
 
             //tween image color:
             if (colorImageTarget != null)
-            {
                 Tween.Color(colorImageTarget, _normalColorImage, colorDuration, 0, null, Tween.LoopType.None, null, null, false);
-            }
         }
 
         private void ColorSelected()
@@ -505,15 +465,11 @@ namespace Pixelplacement
 
             //tween material color:
             if (colorRendererTarget != null && colorRendererTarget.material.HasProperty("_Color"))
-            {
                 _colorTweenMaterial = Tween.Color(colorRendererTarget, selectedColor, colorDuration, 0, null, Tween.LoopType.None, null, null, false);
-            }
 
             //tween image color:
             if (colorImageTarget != null)
-            {
                 Tween.Color(colorImageTarget, selectedColor, colorDuration, 0, null, Tween.LoopType.None, null, null, false);
-            }
         }
 
         private void ColorPressed()
@@ -522,15 +478,11 @@ namespace Pixelplacement
 
             //tween material color:
             if (colorRendererTarget != null && colorRendererTarget.material.HasProperty("_Color"))
-            {
                 _colorTweenMaterial = Tween.Color(colorRendererTarget, pressedColor, colorDuration, 0, null, Tween.LoopType.None, null, null, false);
-            }
 
             //tween image color:
             if (colorImageTarget != null)
-            {
                 Tween.Color(colorImageTarget, pressedColor, colorDuration, 0, null, Tween.LoopType.None, null, null, false);
-            }
         }
 
         private void ColorDisabled()
@@ -539,15 +491,11 @@ namespace Pixelplacement
 
             //tween material color:
             if (colorRendererTarget != null && colorRendererTarget.material.HasProperty("_Color"))
-            {
                 _colorTweenMaterial = Tween.Color(colorRendererTarget, disabledColor, colorDuration, 0, null, Tween.LoopType.None, null, null, false);
-            }
 
             //tween image color:
             if (colorImageTarget != null)
-            {
                 Tween.Color(colorImageTarget, disabledColor, colorDuration, 0, null, Tween.LoopType.None, null, null, false);
-            }
         }
 
         private void ScaleReset()

@@ -51,13 +51,9 @@ public class ColliderButtonSelector : MonoBehaviour
         if (_index > colliderButtons.Length-1)
         {
             if (loopAround)
-            {
                 _index = 0;
-            }
             else
-            {
                 _index = colliderButtons.Length - 1;
-            }
         }
     
         chooser.transform.LookAt(colliderButtons[_index].transform);
@@ -70,13 +66,9 @@ public class ColliderButtonSelector : MonoBehaviour
         if (_index < 0)
         {
             if (loopAround)
-            {
                 _index = colliderButtons.Length - 1;
-            }
             else
-            {
                 _index = 0;
-            }
         }
 
         chooser.transform.LookAt(colliderButtons[_index].transform);

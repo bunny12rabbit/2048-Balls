@@ -56,33 +56,22 @@ namespace Pixelplacement
                 {
                     index = low + (((high - low) / 2) | 0);
                     if (arcLengths[index] < targetLength)
-                    {
                         low = index + 1;
-
-                    }
                     else
-                    {
                         high = index;
-                    }
                 }
 
                 //adjust:
                 if (arcLengths[index] > targetLength)
-                {
                     index--;
-                }
 
                 float lengthBefore = arcLengths[index];
 
                 //interpolate or use as is:
                 if (lengthBefore == targetLength)
-                {
                     return Locate(startPosition, endPosition, startTangent, endTangent, index / distributionSteps);
-                }
                 else
-                {
                     return Locate(startPosition, endPosition, startTangent, endTangent, (index + (targetLength - lengthBefore) / (arcLengths[index + 1] - lengthBefore)) / distributionSteps);
-                }
             }
 
             return Locate(startPosition, endPosition, startTangent, endTangent, percentage);

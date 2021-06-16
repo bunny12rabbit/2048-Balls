@@ -28,9 +28,7 @@ namespace Data
             int randomIndex = _lastSong;
 
             while (randomIndex == _lastSong)
-            {
                 randomIndex = Random.Range(0, musicClips.Length);
-            }
 
             _lastSong = randomIndex;
 
@@ -40,9 +38,7 @@ namespace Data
         public Sound GetFxSound(AudioFxTypes type)
         {
             if (_fxClipsTable == null)
-            {
                 InitializeFxClipsTable();
-            }
 
             return _fxClipsTable[type];
         }
@@ -52,9 +48,7 @@ namespace Data
             _fxClipsTable = new Dictionary<AudioFxTypes, Sound>(fxClips.Length);
 
             foreach (var fxClip in fxClips)
-            {
                 _fxClipsTable.Add(fxClip.type, fxClip);
-            }
         }
     }
 }

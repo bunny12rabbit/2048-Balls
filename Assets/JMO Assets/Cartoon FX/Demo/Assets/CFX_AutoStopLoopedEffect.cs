@@ -29,9 +29,7 @@ public class CFX_AutoStopLoopedEffect : MonoBehaviour
 				
 				CFX_Demo_Translate translation = this.gameObject.GetComponent<CFX_Demo_Translate>();
 				if(translation != null)
-				{
 					translation.enabled = false;
-				}
 			}
 		}
 	}

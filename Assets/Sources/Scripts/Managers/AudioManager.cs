@@ -50,14 +50,10 @@ namespace Managers
         private void TrySetReferences()
         {
             if (musicAudioSource == null)
-            {
                 musicAudioSource = gameObject.GetOrAddComponent<AudioSource>();
-            }
 
             if (fxAudioSource == null)
-            {
                 fxAudioSource = gameObject.GetOrAddComponent<AudioSource>();
-            }
         }
 
         private void Start()
@@ -108,12 +104,8 @@ namespace Managers
             while (true)
             {
                 if (musicAudioSource.isPlaying)
-                {
                     if (musicAudioSource.clip.length - musicAudioSource.time <= fadeDuration)
-                    {
                         yield return StartCoroutine(Fade(FadeType.FadeOut));
-                    }
-                }
 
                 yield return null;
             }
@@ -144,9 +136,7 @@ namespace Managers
                 musicAudioSource.volume = targetVolume;
 
                 if (fadeType == FadeType.FadeOut)
-                {
                     PlayNextSong();
-                }
             }
         }
     }

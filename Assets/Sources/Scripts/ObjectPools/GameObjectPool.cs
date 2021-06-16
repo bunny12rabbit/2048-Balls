@@ -65,9 +65,7 @@ namespace ObjectPools
                 _pool.Add(poolablePrefab.prefabName, poolablePrefab);
 
                 for (var i = 0; i < prewarmCount; i++)
-                {
                     AddItemToSleepingPool(poolablePrefab.prefabName);
-                }
             }
         }
 
@@ -90,9 +88,7 @@ namespace ObjectPools
                     {
                         PushActiveItemToSleepItemsQueue(poolable);
                         if (poolable.activeGameObjects.Count > 0)
-                        {
                             itemTime = poolable.activeGameObjects.Peek().destroyTime;
-                        }
                     }
                 }
             }
@@ -108,9 +104,7 @@ namespace ObjectPools
             var tQueueItem = poolablePrefab.activeGameObjects.Dequeue();
 
             if (tQueueItem.gameObject == null)
-            {
                 return;
-            }
 
             tQueueItem.gameObject.SetActive(false);
             tQueueItem.gameObject.transform.localScale = Vector3.one;
@@ -128,18 +122,14 @@ namespace ObjectPools
             var goForAdd = Resources.Load<GameObject>(prefabName);
 
             if (goForAdd == null)
-            {
                 DebugWrapper.LogWarning($"[GameObjectPool::AddItemToSleepingPool] Object with name {prefabName} is null ");
-            }
 
             var go = Instantiate(goForAdd, _container);
             go.name = prefabName;
             go.SetActive(false);
 
             if (!_pool.ContainsKey(prefabName))
-            {
                 _pool.Add(prefabName, new PoolablePrefab());
-            }
 
             _pool[prefabName].sleepingGameObjects.Enqueue(new QueueItem(go));
         }
@@ -157,26 +147,18 @@ namespace ObjectPools
             var tQueueItem = _pool[prefabName].sleepingGameObjects.Dequeue();
 
             if (tQueueItem == null)
-            {
                 DebugWrapper.LogWarning($"[GameObjectPool::GetItemFromSleepingPool] tQueueItem invalid {prefabName}");
-            }
 
             if (tQueueItem != null && tQueueItem.gameObject == null)
-            {
                 DebugWrapper.LogWarning(
                     $"[GameObjectPool::GetItemFromSleepingPool] tQueueItem GameObject invalid {prefabName}");
-            }
 
 
             long timeToLive = -1;
             if (timeBeforeDestroy > 0.0f)
-            {
                 timeToLive = DateTime.Now.AddSeconds(timeBeforeDestroy).ToUnixTime();
-            }
             else if (_pool[prefabName].timeToLive != 0.0d)
-            {
                 timeToLive = DateTime.Now.AddSeconds(_pool[prefabName].timeToLive).ToUnixTime();
-            }
 
             if (timeToLive > 0.0f)
             {
@@ -195,9 +177,7 @@ namespace ObjectPools
         public static void PushBackGameObject(GameObject gameObject)
         {
             if (_container == null || gameObject == null)
-            {
                 return;
-            }
 
             gameObject.SetActive(false);
             gameObject.transform.parent = _container;
@@ -209,13 +189,9 @@ namespace ObjectPools
                     .FirstOrDefault(item => item.gameObject == gameObject);
 
                 if (activeItem == default)
-                {
                     _pool[gameObject.name].sleepingGameObjects.Enqueue(queueItem);
-                }
                 else
-                {
                     activeItem.destroyTime = 0;
-                }
             }
         }
 
@@ -244,9 +220,7 @@ namespace ObjectPools
             }
 
             if (_pool[prefabName].sleepingGameObjects.Count > 0)
-            {
                 return GetItemFromPoolAndSetTransform();
-            }
 
             AddItemToSleepingPool(prefabName);
             return GetItemFromPoolAndSetTransform();

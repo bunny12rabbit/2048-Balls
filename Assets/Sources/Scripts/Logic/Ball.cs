@@ -39,12 +39,12 @@ namespace Logic
         {
             MatchBalls(matchedObject);
         }
-        
+
         public void SetLineRendererActive(bool state)
         {
             lineRenderer.enabled = state;
         }
-        
+
 
         private void OnEnable()
         {
@@ -60,7 +60,7 @@ namespace Logic
 
         private void SetDefaultState()
         {
-            SwitchPhysics(true);
+            SwitchCollisionDetection(gameObject, true);
             _matchedBall = null;
             Data = null;
 
@@ -75,16 +75,15 @@ namespace Logic
         private void MatchBalls(IMatchableItem<uint> matchedBall)
         {
             if (IsInvalidMatch())
-            {
                 return;
-            }
 
             _matchedBall = (Ball)matchedBall;
 
             _matchedBall.Data.IsMatched = true;
-            _matchedBall.SwitchPhysics(false);
 
-            SwitchPhysics(false);
+            SwitchCollisionDetection(_matchedBall.gameObject, false);
+            SwitchCollisionDetection(gameObject, false);
+
             Data.IsMatched = true;
 
             DebugWrapper.Log(
@@ -99,12 +98,12 @@ namespace Logic
                 var matchedBallPosition = matchedBall.transform.position;
 
                 bool isIncorrectPosition = Mathf.Abs(position.y - matchedBallPosition.y) > HEIGHT_DIFFERENCE &&
-                         position.y - matchedBallPosition.y < HEIGHT_DIFFERENCE;
+                                           position.y - matchedBallPosition.y < HEIGHT_DIFFERENCE;
 
                 bool isSameBall = ReferenceEquals(matchedBall, _matchedBall);
-                
+
                 return GameManager.Instance.IsWin || matchedBall.Data.IsMatched ||
-                       _matchedBall != null && !isSameBall || isIncorrectPosition;
+                       _matchedBall != null || isSameBall || isIncorrectPosition;
             }
         }
 
@@ -119,20 +118,16 @@ namespace Logic
             UpdateData();
 
             if (IsWinCondition())
-            {
                 GameManager.Instance.WinGame();
-            }
             else
-            {
                 AudioManager.Instance.PlayFxSound(AudioFxTypes.Collapse);
-            }
 
             SpawnMatchVfx();
 
-            ItemSpawner.Instance.UpdateMaxSpawnedCriteria(Data.Criteria);
             PushMatchedBallBackToPool();
+            ItemSpawner.Instance.UpdateMaxSpawnedCriteria(Data.Criteria);
             ResetBallState();
-            SwitchPhysics(true);
+            SwitchCollisionDetection(gameObject, true);
         }
 
         private void PushMatchedBallBackToPool()
@@ -142,6 +137,15 @@ namespace Logic
         }
 
         private void SwitchPhysics(bool state) => CollisionHandler.SwitchPhysics(state);
+
+        private static void SwitchCollisionDetection(GameObject target, bool isActive)
+        {
+            foreach (Transform childTransform in target.transform)
+            {
+                childTransform.gameObject.layer =
+                    Constants.LayersNames.GetLayer(isActive ? Constants.LayersNames.Layers.Ball : Constants.LayersNames.Layers.IgnorePhysics);
+            }
+        }
 
         private bool IsWinCondition() =>
             Data?.Criteria >= GameManager.Instance.WinCriteria;
@@ -157,9 +161,7 @@ namespace Logic
             if (criteria == default)
             {
                 if (Data == null)
-                {
                     return;
-                }
 
                 previousColor = BallData.Color;
                 Data.UpdateData();
@@ -173,7 +175,7 @@ namespace Logic
             label.text = Data.Criteria.ToString();
             spriteRenderer.color = BallData.Color;
             name = _initialName + Data.Criteria;
-            
+
             UpdateLocalScale(BallData.LocalScale);
         }
     }

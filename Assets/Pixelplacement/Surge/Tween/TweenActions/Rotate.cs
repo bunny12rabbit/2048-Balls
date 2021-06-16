@@ -44,9 +44,7 @@ namespace Pixelplacement.TweenSystem
         protected override void Operation (float percentage)
         {
             if (percentage == 0)
-            {
                 _target.localEulerAngles = _start;
-            }
             Vector3 spinAmount = TweenUtilities.LinearInterpolate (Vector3.zero, EndValue, percentage);
             Vector3 spinDifference = spinAmount - _previous;
             _previous += spinDifference;

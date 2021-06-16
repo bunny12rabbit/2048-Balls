@@ -62,11 +62,9 @@ namespace Pixelplacement
                     if (item.transform.parent == null)
                     {
                         if (item == this)
-                        {
                             item.SetActive (true);
-                        }else{
+                        else
                             item.SetActive (false);
-                        }
                     }
                 }
             }
@@ -78,17 +76,13 @@ namespace Pixelplacement
         public void HideAll ()
         {
             if (transform.parent != null)
-            {
                 foreach (Transform item in transform.parent) 
                 {
                     if (item.GetComponent<DisplayObject> () != null) item.gameObject.SetActive (false);
                 }
-            }else{
-                foreach (var item in Resources.FindObjectsOfTypeAll<DisplayObject> ()) 
-                {
+            else
+                foreach (var item in Resources.FindObjectsOfTypeAll<DisplayObject> ())
                     if (item.transform.parent == null) item.gameObject.SetActive (false);
-                }
-            }
         }
     }
 }

@@ -118,9 +118,7 @@ namespace Pixelplacement
         {
             //if we don't have at least 2 anchors, fix it:
             if (Anchors.Length < 2)
-            {
                 AddAnchors(2 - Anchors.Length);
-            }
         }
 
         //Loop:
@@ -145,16 +143,13 @@ namespace Pixelplacement
                 for (int i = 0; i < followers.Length; i++)
                 {
                     if (followers[i].WasMoved || needToUpdate)
-                    {
                         followers[i].UpdateOrientation(this);
-                    }
                 }
             }
 
             //manage anchors:
             bool anchorChanged = false;
             if (Anchors.Length > 1)
-            {
                 for (int i = 0; i < Anchors.Length; i++)
                 {
                     //if this spline has changed notify and wipe cached percentage:
@@ -193,8 +188,6 @@ namespace Pixelplacement
                     }
                 }
 
-            }
-
             //length changed:
             if (_previousLength != Anchors.Length || anchorChanged)
             {
@@ -223,9 +216,7 @@ namespace Pixelplacement
                 float currentPercentage = _splineReparams[i].length / Length;
 
                 if (currentPercentage == percent)
-                {
                     return _splineReparams[i].percentage;
-                }
 
                 if (currentPercentage > percent)
                 {
@@ -474,22 +465,16 @@ namespace Pixelplacement
         {
             //clamp or loop percentage:
             if (loop)
-            {
                 percentage = Mathf.Repeat(percentage, 1);
-            }
             else
-            {
                 percentage = Mathf.Clamp01(percentage);
-            }
 
             //curve identification and evaluation:
             if (Anchors.Length == 2)
             {
                 //direction reversed?
                 if (direction == SplineDirection.Backwards)
-                {
                     percentage = 1 - percentage;
-                }
 
                 //simply evaluate the curve since there is only one:
                 return new CurveDetail(0, percentage);
