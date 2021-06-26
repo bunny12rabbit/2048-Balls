@@ -7,6 +7,7 @@ namespace InputSystems
 {
     public class InputListener : SingletonBehaviourGeneric<InputListener>
     {
+        public static event Action OnTripleTouch;
         public static event Action<Vector3> OnPress;
         public static event Action<Vector3> OnDrag;
         public static event Action OnRelease;
@@ -15,6 +16,8 @@ namespace InputSystems
 
 
         private float SqrThreshold => threshold * threshold;
+
+        private static bool IsTripleTouch => Input.touchCount == 3;
         private static bool IsPressed => Input.GetMouseButtonDown(0);
         private static bool IsReleased => Input.GetMouseButtonUp(0);
         private static bool IsHeld => Input.GetMouseButton(0);
@@ -22,6 +25,12 @@ namespace InputSystems
 
         private void Update()
         {
+            if (IsTripleTouch)
+            {
+                OnTripleTouch?.Invoke();
+                return;
+            }
+            
             if (StaticUtilities.IsPointerOverUIObject())
                 return;
 

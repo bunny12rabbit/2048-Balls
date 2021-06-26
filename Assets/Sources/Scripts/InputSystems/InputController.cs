@@ -1,6 +1,7 @@
 ﻿using Generics;
 using Interfaces;
 using Logic;
+using Tayx.Graphy;
 using UnityEngine;
 
 namespace InputSystems
@@ -38,19 +39,23 @@ namespace InputSystems
 
         private void SubscribeInputEvents()
         {
-            InputListener.OnPress += OnPress;
-            InputListener.OnRelease += OnRelease;
-            InputListener.OnDrag += OnDrag;
+            InputListener.OnTripleTouch += ((IInputHandler)this).OnTripleTouch;
+            InputListener.OnPress += ((IInputHandler)this).OnPress;
+            InputListener.OnRelease += ((IInputHandler)this).OnRelease;
+            InputListener.OnDrag += ((IInputHandler)this).OnDrag;
         }
 
         private void UnSubscribeInputEvents()
         {
-            InputListener.OnPress -= OnPress;
-            InputListener.OnRelease -= OnRelease;
-            InputListener.OnDrag -= OnDrag;
+            InputListener.OnTripleTouch -= ((IInputHandler)this).OnTripleTouch;
+            InputListener.OnPress -= ((IInputHandler)this).OnPress;
+            InputListener.OnRelease -= ((IInputHandler)this).OnRelease;
+            InputListener.OnDrag -= ((IInputHandler)this).OnDrag;
         }
 
-        public void OnPress(Vector3 position)
+        void IInputHandler.OnTripleTouch() => GraphyManager.Instance.ToggleActive();
+
+        void IInputHandler.OnPress(Vector3 position)
         {
             if (!_isCanControl)
                 return;
@@ -61,7 +66,7 @@ namespace InputSystems
             _offset = _initialPosition;
         }
 
-        public void OnDrag(Vector3 position)
+        void IInputHandler.OnDrag(Vector3 position)
         {
             if (!_isControlled)
                 return;
@@ -69,7 +74,7 @@ namespace InputSystems
             _newPosition = GetNewWorldPosition(position) - _offset;
         }
 
-        public void OnRelease()
+        void IInputHandler.OnRelease()
         {
             if (!_isCanControl && !_isControlled)
                 return;
