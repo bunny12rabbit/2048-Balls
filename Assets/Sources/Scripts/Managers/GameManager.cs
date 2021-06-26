@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Data;
 using Generics;
 using UI;
@@ -43,6 +42,7 @@ namespace Managers
             base.Awake();
 
             QualitySettings.vSyncCount = 1;
+            QualitySettings.maxQueuedFrames = 3;
         }
 
         private void OnValidate()

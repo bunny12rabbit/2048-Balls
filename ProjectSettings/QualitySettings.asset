@@ -210,8 +210,8 @@ QualitySettings:
     shadowmaskMode: 1
     skinWeights: 4
     textureQuality: 0
-    anisotropicTextures: 0
-    antiAliasing: 0
+    anisotropicTextures: 2
+    antiAliasing: 2
     softParticles: 0
     softVegetation: 1
     realtimeReflectionProbes: 0
@@ -230,7 +230,8 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    customRenderPipeline: {fileID: 0}
+    customRenderPipeline: {fileID: 11400000, guid: 28bb448edd587574881db3d6e756626d,
+      type: 2}
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
     Android: 5
@@ -246,5 +247,5 @@ QualitySettings:
     WiiU: 5
     Windows Store Apps: 5
     XboxOne: 5
-    iPhone: 2
+    iPhone: 5
     tvOS: 2
