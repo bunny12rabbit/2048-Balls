@@ -3,9 +3,7 @@ using Data;
 using Generics;
 using InputSystems;
 using Managers;
-using ObjectPools;
 using Pixelplacement;
-using TMPro;
 using UnityEngine;
 
 namespace Logic
@@ -13,6 +11,8 @@ namespace Logic
     public class Ball : MatchableItemGeneric<uint>
     {
         private const float HEIGHT_DIFFERENCE = 0.1f;
+        private const string MatchedBallColorString = "#0087FF";
+        private const string SameInstanceIdColorString = "red";
 
         #region Variables
 
@@ -60,7 +60,7 @@ namespace Logic
 
         private void SetDefaultState()
         {
-            SwitchCollisionDetection(gameObject, true);
+            SwitchCollisionDetection(this, true);
             _matchedBall = null;
             Data = null;
 
@@ -79,17 +79,22 @@ namespace Logic
 
             _matchedBall = (Ball)matchedBall;
 
-            _matchedBall.Data.IsMatched = true;
+            SwitchCollisionDetection(_matchedBall, false);
+            SwitchCollisionDetection(this, false);
 
-            SwitchCollisionDetection(_matchedBall.gameObject, false);
-            SwitchCollisionDetection(gameObject, false);
-
-            Data.IsMatched = true;
+            var thisInstanceId = GetInstanceID();
+            var matchedBallInstanceId = _matchedBall.GetInstanceID();
+            var isSameInstanceId = thisInstanceId == matchedBallInstanceId;
+            var matchedBallInstanceIdColorString = isSameInstanceId ? SameInstanceIdColorString : "white";
 
             DebugWrapper.Log(
-                $"<color=green>{name}.IsMatched={Data.IsMatched}</color> collides with " +
-                $"<color=blue>{_matchedBall.gameObject.name}.IsMatched={_matchedBall.Data.IsMatched}</color>");
+                $"<color=green>{name}.IsMatched={Data.IsMatched}</color> id={thisInstanceId} collides with " +
+                $"<color={MatchedBallColorString}>{_matchedBall.gameObject.name}.IsMatched={_matchedBall.Data.IsMatched}</color>" +
+                $"<color={matchedBallInstanceIdColorString}> id={matchedBallInstanceId}</color>");
 
+            _matchedBall.Data.IsMatched = true;
+            Data.IsMatched = true;
+            
             MoveTowardsOther(_matchedBall);
 
             bool IsInvalidMatch()
@@ -102,8 +107,7 @@ namespace Logic
 
                 bool isSameBall = ReferenceEquals(matchedBall, _matchedBall);
 
-                return GameManager.Instance.IsWin || matchedBall.Data.IsMatched ||
-                       _matchedBall != null || isSameBall || isIncorrectPosition;
+                return GameManager.Instance.IsWin || matchedBall.Data.IsMatched || Data.IsMatched || _matchedBall != null || isSameBall || isIncorrectPosition;
             }
         }
 
@@ -127,7 +131,7 @@ namespace Logic
             PushMatchedBallBackToPool();
             ItemSpawner.Instance.UpdateMaxSpawnedCriteria(Data.Criteria);
             ResetBallState();
-            SwitchCollisionDetection(gameObject, true);
+            SwitchCollisionDetection(this, true);
         }
 
         private void PushMatchedBallBackToPool()
@@ -138,8 +142,10 @@ namespace Logic
 
         private void SwitchPhysics(bool state) => CollisionHandler.SwitchPhysics(state);
 
-        private static void SwitchCollisionDetection(GameObject target, bool isActive)
+        private static void SwitchCollisionDetection(Ball target, bool isActive)
         {
+            target.SwitchPhysics(isActive);
+            
             foreach (Transform childTransform in target.transform)
             {
                 childTransform.gameObject.layer =
