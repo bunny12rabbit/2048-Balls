@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Data;
 using Generics;
+using Tayx.Graphy;
 using UI;
 using UnityEngine;
 
@@ -57,6 +59,12 @@ namespace Managers
             }
 
             winCriteria = (uint)Mathf.Clamp(winCriteria, minCriteria, maxCriteriaAvailable);
+        }
+
+        private void Update()
+        {
+            if (Input.touchCount == 3)
+                GraphyManager.Instance.ToggleActive();
         }
     }
 }
