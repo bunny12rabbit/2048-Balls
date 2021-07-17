@@ -14,12 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicClips:
   - type: 3
-    clip: {fileID: 8300000, guid: f4f0c5c2a42e89146bbef7cb31a13872, type: 3}
+    clip: {fileID: 8300000, guid: 18fd39d95b828324f85145f3f442c14d, type: 3}
     volume: 1
     pitch: 1
     loop: 0
   - type: 3
-    clip: {fileID: 8300000, guid: b46e90ec8e929d048b67532ed3851a4b, type: 3}
+    clip: {fileID: 8300000, guid: 7f65b21f51e893145bf54dda40843724, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - type: 3
+    clip: {fileID: 8300000, guid: 4f596d7a20567fe4dbab849abbcc323c, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -31,7 +36,7 @@ MonoBehaviour:
     loop: 0
   - type: 1
     clip: {fileID: 8300000, guid: 99e8525de3ba7c6468abb8f1c02df6e8, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     loop: 0
   - type: 2
